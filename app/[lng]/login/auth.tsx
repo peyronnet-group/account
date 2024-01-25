@@ -86,7 +86,7 @@ export default function LoginPage(props: { lng: string }) {
               variables: customTheme,
             }}
             socialLayout="horizontal"
-            redirectTo="http://account.peyronnet.group/auth/callback"
+            redirectTo="https://account.peyronnet.group/auth/callback"
           />
         </div>
       </section>
