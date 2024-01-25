@@ -14,5 +14,6 @@
   "peyrsharp-desc": "A C# library designed to make developers's job easier.",
   "synethia-desc": "A basic C# algorithm that can determine the behavior of a user with an application.",
   "see-all-nuget": "See all of our NuGet packages.",
-  "home": "Home"
+  "home": "Home",
+  "welcome-back": "Welcome back"
 }

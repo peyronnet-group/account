@@ -87,13 +87,17 @@ export function NavMenu(props: { lng: string }) {
         <NavigationMenuList>
           <NavigationMenuItem>
             <Link href="/" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              <NavigationMenuLink
+                className={"bg-transparent " + navigationMenuTriggerStyle()}
+              >
                 {t("home")}
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuTrigger>Léo Corporation</NavigationMenuTrigger>
+            <NavigationMenuTrigger className="bg-transparent">
+              Léo Corporation
+            </NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                 <li className="row-span-3">
@@ -136,7 +140,9 @@ export function NavMenu(props: { lng: string }) {
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuTrigger>Devyus</NavigationMenuTrigger>
+            <NavigationMenuTrigger className="bg-transparent">
+              Devyus
+            </NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                 <li className="row-span-3">
