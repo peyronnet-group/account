@@ -6,5 +6,13 @@
   "sign-up": "Sign-up",
   "sign-out": "Sign-out",
   "my-account": "My account",
-  "get-started": "Get started"
+  "get-started": "Get started",
+  "passliss-desc": "Passliss is a web application that allows you to generate secure passwords, test the strength of exiting ones and more.",
+  "gavilya-desc": "Gavilya gathers all your video games in one place.",
+  "browse-apps": "Browse all of our apps.",
+  "devyus-tagline": "Empowering developers.",
+  "peyrsharp-desc": "A C# library designed to make developers's job easier.",
+  "synethia-desc": "A basic C# algorithm that can determine the behavior of a user with an application.",
+  "see-all-nuget": "See all of our NuGet packages.",
+  "home": "Home"
 }

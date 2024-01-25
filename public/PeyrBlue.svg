@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="1000px" height="1000px" viewBox="0 0 1000 1000" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="476" y2="625" id="gradient_1">
+      <stop offset="0%" stop-color="#004EFF" />
+      <stop offset="100%" stop-color="#000048" />
+    </linearGradient>
+    <path d="M0 0L1000 0L1000 1000L0 1000L0 0Z" id="path_1" />
+    <clipPath id="clip_1">
+      <use xlink:href="#path_1" />
+    </clipPath>
+  </defs>
+  <g id="Logo Blue" clip-path="url(#clip_1)">
+    <path d="M0 0L1000 0L1000 1000L0 1000L0 0Z" id="Logo-Blue" fill="#FFFFFF" fill-opacity="0" fill-rule="evenodd" stroke="none" />
+    <g id="Logo-PEYRONNET" transform="translate(125 125)">
+      <path d="M0 375.5C0 168.117 168.117 0 375.5 0C582.883 0 751 168.117 751 375.5C751 582.883 582.883 751 375.5 751C168.117 751 0 582.883 0 375.5Z" id="Oval" fill="#FFFFFF" fill-rule="evenodd" stroke="none" />
+      <g fill="url(#gradient_1)" stroke="none" id="P" transform="translate(137.64941 62.65027)">
+        <path d="M295.5 137.549Q326.5 137.549 352.25 151.799Q378 166.049 393.5 190.299Q409 214.549 409 245.049Q409 276.549 392 302.299Q375 328.049 347 343.299Q319 358.549 285.5 358.549L145 358.549L145 487.549L91 487.549L91 137.549L295.5 137.549ZM280.5 306.549Q300 306.549 316 298.049Q332 289.549 341.75 275.549Q351.5 261.549 351.5 245.049Q351.5 229.549 341.75 217.049Q332 204.549 316 197.049Q300 189.549 280.5 189.549L145 189.549L145 306.549L280.5 306.549Z" />
+      </g>
+    </g>
+  </g>
+</svg>

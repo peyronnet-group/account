@@ -6,5 +6,13 @@
   "sign-up": "S'inscrire",
   "sign-out": "Se déconnecter",
   "mon-compte": "Mon compte",
-  "get-started": "Démarrer"
+  "get-started": "Démarrer",
+  "passliss-desc": "Passliss est une application web qui vous permet de générer des mots de passe sécurisés, de tester la force des mots de passe existants et plus encore.",
+  "gavilya-desc": "Gavilya rassemble tous vos jeux vidéo en un seul endroit.",
+  "browse-apps": "Parcourez toutes nos applications",
+  "devyus-tagline": "Donner du pouvoir aux développeurs.",
+  "peyrsharp-desc": "Une bibliothèque C# conçue pour faciliter le travail des développeurs.",
+  "synethia-desc": "Un algorithme de base en C# qui peut déterminer le comportement d'un utilisateur avec une application.",
+  "see-all-nuget": "Voir tous nos paquets NuGet",
+  "home": "Accueil"
 }
