@@ -4,7 +4,7 @@
   "home-desc": "The Peyronnet account allows you to access various services accross Peyronnet Group's products.",
   "sign-in": "Sign-in",
   "sign-up": "Sign-up",
-  "sign-out": "Sign-out",
+  "sign-out": "Sign out",
   "my-account": "My account",
   "get-started": "Get started",
   "passliss-desc": "Passliss is a web application that allows you to generate secure passwords, test the strength of exiting ones and more.",
@@ -15,5 +15,8 @@
   "synethia-desc": "A basic C# algorithm that can determine the behavior of a user with an application.",
   "see-all-nuget": "See all of our NuGet packages.",
   "home": "Home",
-  "welcome-back": "Welcome back"
+  "welcome-back": "Welcome back",
+  "username": "Username",
+  "full-name": "Full name",
+  "email": "Email"
 }

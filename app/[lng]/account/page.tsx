@@ -1,8 +1,9 @@
-import LoginPage from "./auth";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
+import AccountForm from "./account-form";
 import { redirect } from "next/navigation";
-export default async function SignIn({
+
+export default async function Account({
   params: { lng },
 }: {
   params: { lng: any };
@@ -14,8 +15,9 @@ export default async function SignIn({
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (user) {
-    return redirect("/account");
+  if (!user) {
+    return redirect("/login");
   }
-  return <LoginPage lng={lng} />;
+
+  return <AccountForm lng={lng} user={user} />;
 }
