@@ -88,14 +88,17 @@ export function NavMenu(props: { lng: string }) {
           <NavigationMenuItem>
             <Link href="/" legacyBehavior passHref>
               <NavigationMenuLink
-                className={"bg-transparent " + navigationMenuTriggerStyle()}
+                className={
+                  "bg-transparent dark:bg-transparent " +
+                  navigationMenuTriggerStyle()
+                }
               >
                 {t("home")}
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuTrigger className="bg-transparent">
+            <NavigationMenuTrigger className="bg-transparent dark:bg-transparent">
               Léo Corporation
             </NavigationMenuTrigger>
             <NavigationMenuContent>
@@ -140,7 +143,7 @@ export function NavMenu(props: { lng: string }) {
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuTrigger className="bg-transparent">
+            <NavigationMenuTrigger className="bg-transparent dark:bg-transparent">
               Devyus
             </NavigationMenuTrigger>
             <NavigationMenuContent>
