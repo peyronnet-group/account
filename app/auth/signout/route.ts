@@ -15,7 +15,10 @@ export async function POST(req: any) {
     await supabase.auth.signOut();
   }
 
-  return NextResponse.redirect(new URL("/", req.url), {
-    status: 302,
-  });
+  return NextResponse.redirect(
+    new URL("https://account.peyronnet.group/", req.url),
+    {
+      status: 302,
+    }
+  );
 }
