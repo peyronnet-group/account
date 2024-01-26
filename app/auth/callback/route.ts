@@ -13,6 +13,6 @@ export async function GET(req: any) {
   }
 
   return NextResponse.redirect(
-    new URL("https://account.peyronnet.group/account", req.url)
+    new URL("https://account.peyronnet.group/me", req.url)
   );
 }
