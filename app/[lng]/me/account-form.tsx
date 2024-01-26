@@ -4,6 +4,8 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useTranslation } from "@/app/i18n/client";
+import { Paragraph } from "@/components/text";
+import { ShoppingBag } from "lucide-react";
 
 export default function AccountForm({ user, lng }: any) {
   const supabase = createClientComponentClient();
@@ -34,8 +36,17 @@ export default function AccountForm({ user, lng }: any) {
 
   const { t } = useTranslation(lng, "common");
   return (
-    <div className="p-2">
-      <h2 className="text-2xl uppercase font-wide">{t("my-account")}</h2>
+    <section className="">
+      <div className="p-5 bg-gradient-to-br from-blue-500 to-blue-600 text-white">
+        <h2 className="text-2xl uppercase font-wide">{t("my-account")}</h2>
+        <p className="font-serif ml-1">
+          {t("welcome-msg").replace("{{user}}", fullname || "user")}
+        </p>
+      </div>
+      <div className="p-2">
+        <h3 className="font-wide uppercase">{t("your-info")}</h3>
+        <p className="font-serif">{t("your-info-desc")}</p>
+      </div>
       <div className="form-widget border border-slate-200 dark:border-slate-800 m-2 p-2 rounded-md">
         <div>
           <label htmlFor="email">{t("email")}</label>
@@ -59,20 +70,27 @@ export default function AccountForm({ user, lng }: any) {
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
-        <section className="flex space-x-2 justify-center m-2">
-          <div>
-            <form action="/auth/signout" method="post">
-              <Button
-                variant="destructive"
-                className="button block"
-                type="submit"
-              >
-                {t("sign-out")}
-              </Button>
-            </form>
-          </div>
-        </section>
       </div>
-    </div>
+      <div className="p-2">
+        <h3 className="font-wide uppercase">{t("products")}</h3>
+        <p className="font-serif">{t("products-desc")}</p>
+      </div>
+      <div className="m-2 p-5 border rounded-md flex flex-col items-center space-y-2 border-slate-200 dark:border-slate-800">
+        <ShoppingBag />
+        <p className="font-serif">{t("no-products")}</p>
+      </div>
+      <div className="p-2">
+        <h3 className="font-wide uppercase">{t("session")}</h3>
+        <form action="/auth/signout" method="post">
+          <Button
+            variant="link"
+            className="button block text-red-500 dark:text-red-600"
+            type="submit"
+          >
+            {t("sign-out")}
+          </Button>
+        </form>
+      </div>
+    </section>
   );
 }
