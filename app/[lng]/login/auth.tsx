@@ -4,7 +4,7 @@ import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Auth } from "@supabase/auth-ui-react";
 import { useTheme } from "next-themes";
-import { Title } from "@/components/text";
+import { Paragraph, Title } from "@/components/text";
 import { useTranslation } from "@/app/i18n/client";
 import Logo from "@/components/logo";
 
@@ -68,9 +68,18 @@ export default function LoginPage(props: { lng: string }) {
     },
   };
   return (
-    <main className="min-h-screen grid sm:grid-cols-2">
-      <section className="hidden bg-blue-600 sm:flex p-2 flex-col justify-center">
-        <Title className="text-white">{t("welcome-back")}</Title>
+    <main className="min-h-[calc(100vh-4rem-1px)] grid sm:grid-cols-2">
+      <section className="hidden bg-blue-600 sm:grid p-2 grid-rows-3 justify-center">
+        <span></span>
+        <span>
+          <Title className="text-white">{t("welcome-back")}</Title>
+          <p className="ml-2 text-sm font-serif sm:text-lg">
+            {t("account-desc")}
+          </p>
+        </span>
+        <div className="bg-slate-800/10 border flex flex-col self-end bottom-0 border-blue-500 p-4 rounded-md">
+          <p>{t("account-tip")}</p>
+        </div>
       </section>
       <section className="flex-col flex justify-center items-center p-2">
         <div className="bg-white/50 max-w-[600px] w-full backdrop-blur-sm dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-md p-2">
