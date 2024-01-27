@@ -16,7 +16,7 @@ export default async function Account({
   } = await supabase.auth.getUser();
 
   if (!user) {
-    return redirect("/login");
+    //return redirect("/login");
   }
 
   return <AccountForm lng={lng} user={user} />;
