@@ -15,6 +15,8 @@ import { redirect } from "next/navigation";
 import { ReactNode } from "react";
 
 export default async function Account() {
+  const { t } = await useTranslation("fr", "common");
+
   const [session, userDetails, subscription] = await Promise.all([
     getSession(),
     getUserDetails(),
@@ -63,8 +65,6 @@ export default async function Account() {
     }
     revalidatePath("/me");
   };
-
-  const { t } = await useTranslation("fr", "common");
 
   return (
     <section className="">
