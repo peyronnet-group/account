@@ -26,6 +26,13 @@
   "your-info-desc": "Gérer et modifier les informations relatives à votre compte.",
   "products": "Produits",
   "products-desc": "Gérer vos abonnements.",
-  "no-products": "Aucun produit n'est disponible.",
-  "session": "Session"
+  "no-products": "Vous n'êtes actuellement abonné à aucun produit.",
+  "session": "Session",
+  "update-name": "Mettre à jour votre nom",
+  "update-email": "Mettre à jour votre email",
+  "name-desc": "Veuillez saisir votre nom complet ou un nom d'affichage avec lequel vous vous sentez à l'aise.",
+  "email-desc": "Veuillez saisir l'adresse électronique que vous souhaitez utiliser pour vous connecter.",
+  "name-char": "64 caractères maximum",
+  "email-notify": "Nous vous enverrons un courriel pour vérifier le changement.",
+  "products-available": "Vous avez acheté/souscrit à certains de nos produits."
 }

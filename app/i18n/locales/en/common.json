@@ -26,6 +26,13 @@
   "your-info-desc": "Manage and edit information about your account.",
   "products": "Products",
   "products-desc": "Manage your subscriptions.",
-  "no-products": "No products are available.",
-  "session": "Session"
+  "no-products": "You are not currently subscribed to any product.",
+  "session": "Session",
+  "update-name": "Update Name",
+  "update-email": "Update Email",
+  "name-desc": "Please enter your full name, or a display name you are comfortable with.",
+  "email-desc": "Please enter the email address you want to use to login.",
+  "name-char": "64 characters maximum",
+  "email-notify": "We will email you to verify the change.",
+  "products-available": "You have bought/subscribed to some of our products."
 }
