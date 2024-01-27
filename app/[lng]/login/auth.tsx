@@ -1,15 +1,15 @@
 "use client";
 
 import { ThemeSupa } from "@supabase/auth-ui-shared";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Auth } from "@supabase/auth-ui-react";
 import { useTheme } from "next-themes";
-import { Paragraph, Title } from "@/components/text";
+import { Title } from "@/components/text";
 import { useTranslation } from "@/app/i18n/client";
 import Logo from "@/components/logo";
+import { useSupabase } from "@/app/supabase-provider";
 
 export default function LoginPage(props: { lng: string }) {
-  const supabase = createClientComponentClient();
+  const { supabase } = useSupabase();
   const { theme } = useTheme();
   const { t } = useTranslation(props.lng, "common");
   const customTheme = {
