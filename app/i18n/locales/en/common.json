@@ -34,5 +34,13 @@
   "email-desc": "Please enter the email address you want to use to login.",
   "name-char": "64 characters maximum",
   "email-notify": "We will email you to verify the change.",
-  "products-available": "You have bought/subscribed to some of our products."
+  "products-available": "You have bought/subscribed to some of our products.",
+  "available-products": "Available products",
+  "available-products-desc": "Find all available products and plans of Peyronnet Group.",
+  "subscribe": "Subscribe",
+  "manage": "Manage",
+  "monthly-billing": "Monthly billing",
+  "yearly-billing": "Yearly billing",
+  "manage-stripe": "Manage your subscription on Stripe.",
+  "open-portal": "Open customer portal"
 }

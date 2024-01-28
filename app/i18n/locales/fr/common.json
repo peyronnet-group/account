@@ -34,5 +34,13 @@
   "email-desc": "Veuillez saisir l'adresse électronique que vous souhaitez utiliser pour vous connecter.",
   "name-char": "64 caractères maximum",
   "email-notify": "Nous vous enverrons un courriel pour vérifier le changement.",
-  "products-available": "Vous avez acheté/souscrit à certains de nos produits."
+  "products-available": "Vous avez acheté/souscrit à certains de nos produits.",
+  "available-products": "Produits disponibles",
+  "available-products-desc": "Trouver tous les produits et abonnements disponibles du Groupe Peyronnet",
+  "subscribe": "Subscribe",
+  "manage": "Gérer",
+  "monthly-billing": "Facturation mensuelle",
+  "yearly-billing": "Facturation annuelle",
+  "manage-stripe": "Gérez votre abonnement sur Stripe",
+  "open-portal": "Ouvrir le portail client"
 }

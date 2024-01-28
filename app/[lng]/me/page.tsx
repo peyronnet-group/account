@@ -13,9 +13,14 @@ import { cookies } from "next/headers";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ReactNode } from "react";
+import ManageSubscriptionButton from "./ManageSubscriptionButton";
 
-export default async function Account() {
-  const { t } = await useTranslation("fr", "common");
+export default async function Account({
+  params: { lng },
+}: {
+  params: { lng: any };
+}) {
+  const { t } = await useTranslation(lng, "common");
 
   const [session, userDetails, subscription] = await Promise.all([
     getSession(),
@@ -83,10 +88,16 @@ export default async function Account() {
           description={
             subscription ? t("products-available") : t("no-products")
           }
+          footer={<ManageSubscriptionButton lng={lng} session={session} />}
         >
           <div className="mt-8 mb-4">
             {subscription ? (
-              `${subscriptionPrice}/${subscription?.prices?.interval}`
+              <div className="p-4 rounded-md border dark:border-slate-700">
+                <h3 className="font-bold text-xl">
+                  {subscription?.prices?.products?.name}
+                </h3>
+                <p>{`${subscriptionPrice}/${subscription?.prices?.interval}`}</p>
+              </div>
             ) : (
               <Link href="/">{t("products-desc")}</Link>
             )}
