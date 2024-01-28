@@ -36,7 +36,7 @@ export default async function Account({
 
   const subscriptionPrice =
     subscription &&
-    new Intl.NumberFormat("en-US", {
+    new Intl.NumberFormat(lng === "fr" ? "fr-FR" : "en-US", {
       style: "currency",
       currency: subscription?.prices?.currency!,
       minimumFractionDigits: 0,
@@ -99,7 +99,7 @@ export default async function Account({
                 <p>{`${subscriptionPrice}/${subscription?.prices?.interval}`}</p>
               </div>
             ) : (
-              <Link href="/">{t("products-desc")}</Link>
+              <Link href="/products">{t("products-desc")}</Link>
             )}
           </div>
         </Card>

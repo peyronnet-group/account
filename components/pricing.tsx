@@ -73,9 +73,17 @@ export default function Pricing({
       setPriceIdLoading(undefined);
     }
   };
-  console.log(JSON.stringify(products[0].prices));
   if (!products.length)
-    return <section>No plans are available right now.</section>;
+    return (
+      <section className="flex flex-col justify-center items-center min-h-screen ">
+        <h2 className="font-wide uppercase">
+          No plans are available right now.
+        </h2>
+        <p className="font-serif">
+          The product page is currently not available
+        </p>
+      </section>
+    );
 
   if (products.length === 1)
     return (

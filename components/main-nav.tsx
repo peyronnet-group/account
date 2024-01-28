@@ -50,12 +50,12 @@ export function SheetMenu(props: { lng: string }) {
         </SheetHeader>
 
         <Link
-          href={"/"}
+          href={"/me"}
           className={cn(
             "flex items-center px-2 text-lg font-semibold text-slate-200-foreground"
           )}
         >
-          {t("home")}
+          {t("my-account")}
         </Link>
         <Link
           href={"https://leocorporation.dev"}
@@ -86,14 +86,14 @@ export function NavMenu(props: { lng: string }) {
       <NavigationMenu className="hidden sm:block">
         <NavigationMenuList>
           <NavigationMenuItem>
-            <Link href="/" legacyBehavior passHref>
+            <Link href="/me" legacyBehavior passHref>
               <NavigationMenuLink
                 className={
                   "bg-transparent dark:bg-transparent " +
                   navigationMenuTriggerStyle()
                 }
               >
-                {t("home")}
+                {t("my-account")}
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
@@ -112,7 +112,7 @@ export function NavMenu(props: { lng: string }) {
                       <img
                         height={128}
                         width={128}
-                        src={"Logo.svg"}
+                        src={"/Logo.svg"}
                         alt={"The logo of Léo Corporation."}
                       />
                       <div className="mb-2 mt-4 text-lg font-medium">
@@ -157,7 +157,7 @@ export function NavMenu(props: { lng: string }) {
                       <img
                         height={128}
                         width={128}
-                        src={"Devyus.png"}
+                        src={"/Devyus.png"}
                         alt={"The logo of Devyus."}
                       />
                       <div className="mb-2 mt-4 text-lg font-medium">
