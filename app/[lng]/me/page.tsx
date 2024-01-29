@@ -88,7 +88,10 @@ export default async function Account({
             {subscriptions && subscriptions.length > 0 ? (
               <div className="space-y-2">
                 {subscriptions.map((subscription) => (
-                  <div className="p-4 rounded-md border dark:border-slate-700">
+                  <div
+                    key={subscription.id}
+                    className="p-4 rounded-md border dark:border-slate-700"
+                  >
                     <h3 className="font-bold text-xl">
                       {subscription?.prices?.products?.name}
                     </h3>
