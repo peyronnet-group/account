@@ -2,7 +2,7 @@ import { useTranslation } from "@/app/i18n";
 import {
   getSession,
   getUserDetails,
-  getSubscription,
+  getSubscriptions,
 } from "@/app/supabase-server";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -22,10 +22,10 @@ export default async function Account({
 }) {
   const { t } = await useTranslation(lng, "common");
 
-  const [session, userDetails, subscription] = await Promise.all([
+  const [session, userDetails, subscriptions] = await Promise.all([
     getSession(),
     getUserDetails(),
-    getSubscription(),
+    getSubscriptions(),
   ]);
 
   const user = session?.user;
@@ -33,14 +33,6 @@ export default async function Account({
   if (!session) {
     return redirect("/login");
   }
-
-  const subscriptionPrice =
-    subscription &&
-    new Intl.NumberFormat(lng === "fr" ? "fr-FR" : "en-US", {
-      style: "currency",
-      currency: subscription?.prices?.currency!,
-      minimumFractionDigits: 0,
-    }).format((subscription?.prices?.unit_amount || 0) / 100);
 
   const updateName = async (formData: FormData) => {
     "use server";
@@ -86,20 +78,37 @@ export default async function Account({
         <Card
           title={t("products")}
           description={
-            subscription ? t("products-available") : t("no-products")
+            subscriptions && subscriptions.length > 0
+              ? t("products-available")
+              : t("no-products")
           }
           footer={<ManageSubscriptionButton lng={lng} session={session} />}
         >
           <div className="mt-8 mb-4">
-            {subscription ? (
-              <div className="p-4 rounded-md border dark:border-slate-700">
-                <h3 className="font-bold text-xl">
-                  {subscription?.prices?.products?.name}
-                </h3>
-                <p>{`${subscriptionPrice}/${subscription?.prices?.interval}`}</p>
+            {subscriptions && subscriptions.length > 0 ? (
+              <div className="space-y-2">
+                {subscriptions.map((subscription) => (
+                  <div className="p-4 rounded-md border dark:border-slate-700">
+                    <h3 className="font-bold text-xl">
+                      {subscription?.prices?.products?.name}
+                    </h3>
+                    <p>{`${new Intl.NumberFormat(
+                      lng === "fr" ? "fr-FR" : "en-US",
+                      {
+                        style: "currency",
+                        currency: subscription?.prices?.currency!,
+                        minimumFractionDigits: 0,
+                      }
+                    ).format((subscription?.prices?.unit_amount || 0) / 100)}/${
+                      subscription?.prices?.interval
+                    }`}</p>
+                  </div>
+                ))}
               </div>
             ) : (
-              <Link href="/products">{t("products-desc")}</Link>
+              <div className="p-4 rounded-md border dark:border-slate-700">
+                <Link href="/products">{t("products-desc")}</Link>
+              </div>
             )}
           </div>
         </Card>

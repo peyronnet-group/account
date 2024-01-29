@@ -27,7 +27,7 @@ interface Props {
   session: Session | null;
   user: User | null | undefined;
   products: ProductWithPrices[];
-  subscription: SubscriptionWithProduct | null;
+  subscriptions: SubscriptionWithProduct[] | null;
 }
 
 type BillingInterval = "lifetime" | "year" | "month";
@@ -36,7 +36,7 @@ export default function Pricing({
   session,
   user,
   products,
-  subscription,
+  subscriptions,
 }: Props) {
   const { t } = useTranslation("fr", "common");
   const intervals = Array.from(
@@ -51,14 +51,30 @@ export default function Pricing({
     useState<BillingInterval>("month");
   const [priceIdLoading, setPriceIdLoading] = useState<string>();
 
+  function isSubscribedToProduct(productId: string) {
+    if (subscriptions) {
+      for (let i = 0; i < subscriptions?.length; i++) {
+        if (subscriptions[i]?.prices?.product_id === productId) {
+          return true;
+        }
+      }
+    }
+  }
+
   const handleCheckout = async (price: Price) => {
     setPriceIdLoading(price.id);
     if (!user) {
       return router.push("/login");
     }
-    if (subscription) {
-      return router.push("/me");
+
+    if (subscriptions) {
+      for (let i = 0; i < subscriptions?.length; i++) {
+        if (subscriptions[i]?.prices?.product_id === price.product_id) {
+          return router.push("/me");
+        }
+      }
     }
+
     try {
       const { sessionId } = await postData({
         url: "/api/create-checkout-session",
@@ -82,69 +98,6 @@ export default function Pricing({
         <p className="font-serif">
           The product page is currently not available
         </p>
-      </section>
-    );
-
-  if (products.length === 1)
-    return (
-      <section>
-        <div className="max-w-6xl px-4 py-8 mx-auto sm:py-24 sm:px-6 lg:px-8">
-          <div className="sm:flex sm:flex-col sm:align-center">
-            <h2 className="text-2xl uppercase font-wide">
-              {t("available-products")}
-            </h2>
-            <p className="font-serif">{t("available-products-desc")}</p>
-            <div className="relative flex self-center mt-12 border rounded-lg bg-white border-slate-200 dark:bg-slate-900 dark:border-slate-800">
-              <div className="border border-blue-500 border-opacity-50 divide-y rounded-lg shadow-sm bg-slate-900 divide-slate-600">
-                <div className="p-6 py-2 m-1 text-2xl font-medium text-white rounded-md shadow-sm border-slate-800 whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 focus:z-10 sm:w-auto sm:px-8">
-                  {products[0].name}
-                </div>
-              </div>
-            </div>
-            <div className="mt-6 space-y-4 sm:mt-12 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mx-0 xl:grid-cols-3">
-              {products[0].prices?.map((price) => {
-                const priceString =
-                  price.unit_amount &&
-                  new Intl.NumberFormat("en-US", {
-                    style: "currency",
-                    currency: price.currency!,
-                    minimumFractionDigits: 0,
-                  }).format(price.unit_amount / 100);
-
-                return (
-                  <div
-                    key={price.interval}
-                    className="rounded-lg shadow-sm divide-y bg-white divide-slate-100 dark:divide-slate-600 dark:bg-slate-900"
-                  >
-                    <div className="p-6">
-                      <p>
-                        <span className="text-5xl font-extrabold white">
-                          {priceString}
-                        </span>
-                        <span className="text-base font-medium text-slate-100">
-                          /{price.interval}
-                        </span>
-                      </p>
-                      <p className="mt-4 text-slate-300">{price.description}</p>
-                      <Button
-                        type="button"
-                        disabled={false}
-                        onClick={() => handleCheckout(price)}
-                        className="block w-full py-2 mt-12 text-sm font-semibold text-center text-white rounded-md hover:bg-slate-900 "
-                      >
-                        {products[0].name ===
-                        subscription?.prices?.products?.name
-                          ? "Manage"
-                          : "Subscribe"}
-                      </Button>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-          <LogoCloud />
-        </div>
       </section>
     );
 
@@ -202,8 +155,8 @@ export default function Pricing({
                 className={cn(
                   "rounded-lg shadow-sm divide-y border border-slate-300 dark:border-slate-700 bg-white divide-slate-100 dark:divide-slate-600 dark:bg-slate-900",
                   {
-                    "border border-blue-500": subscription
-                      ? product.name === subscription?.prices?.products?.name
+                    "border border-blue-500": subscriptions
+                      ? isSubscribedToProduct(product.id)
                       : product.name === "Freelancer",
                   }
                 )}
@@ -228,7 +181,9 @@ export default function Pricing({
                     onClick={() => handleCheckout(price)}
                     className="block w-full py-2 mt-8 text-sm font-semibold text-center text-white rounded-md hover:bg-slate-900"
                   >
-                    {subscription ? t("manage") : t("subscribe")}
+                    {isSubscribedToProduct(product.id)
+                      ? t("manage")
+                      : t("subscribe")}
                   </Button>
                 </div>
               </div>
