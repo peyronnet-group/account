@@ -37,7 +37,7 @@ export default async function SiteFooter(props: { lng: string }) {
             className="hover:underline"
             target="_blank"
             rel="noreferrer"
-            href={"https://peyronnet.group/cgu"}
+            href={"https://peyronnet.group/cgv"}
           >
             {t("terms-sell")}
           </Link>
