@@ -103,7 +103,7 @@ export default function Pricing({
 
   return (
     <section>
-      <div className="max-w-6xl px-4 py-8 mx-auto sm:py-24 sm:px-6 lg:px-8">
+      <div className="max-w-6xl px-4 py-8 mx-auto sm:py-24 sm:px-6 lg:px-8 min-h-[calc(100vh-48px)]">
         <div className="sm:flex sm:flex-col sm:align-center">
           <h2 className="text-2xl uppercase font-wide">
             {t("available-products")}

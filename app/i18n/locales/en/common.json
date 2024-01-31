@@ -42,5 +42,9 @@
   "monthly-billing": "Monthly billing",
   "yearly-billing": "Yearly billing",
   "manage-stripe": "Manage your subscription on Stripe.",
-  "open-portal": "Open customer portal"
+  "open-portal": "Open customer portal",
+  "privacy-policy": "Privacy policy",
+  "links": "Links",
+  "socials": "Socials",
+  "terms-sell": "Terms and conditions of sale"
 }

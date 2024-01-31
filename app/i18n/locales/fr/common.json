@@ -42,5 +42,9 @@
   "monthly-billing": "Facturation mensuelle",
   "yearly-billing": "Facturation annuelle",
   "manage-stripe": "Gérez votre abonnement sur Stripe",
-  "open-portal": "Ouvrir le portail client"
+  "open-portal": "Ouvrir le portail client",
+  "privacy-policy": "Politique de confidentialité",
+  "links": "Liens",
+  "socials": "Réseaux Sociaux",
+  "terms-sell": "Conditions générales de vente"
 }
