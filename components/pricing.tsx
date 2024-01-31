@@ -92,11 +92,11 @@ export default function Pricing({
   if (!products.length)
     return (
       <section className="flex flex-col justify-center items-center min-h-screen ">
-        <h2 className="font-wide uppercase">
+        <h2 className="font-wide uppercase text-center">
           No plans are available right now.
         </h2>
-        <p className="font-serif">
-          The product page is currently not available
+        <p className="font-serif text-center">
+          The product page is currently not available.
         </p>
       </section>
     );
