@@ -10,7 +10,7 @@ import { useSupabase } from "@/app/supabase-provider";
 
 export default function LoginPage(props: { lng: string }) {
   const { supabase } = useSupabase();
-  const { theme } = useTheme();
+  const { theme, systemTheme } = useTheme();
   const { t } = useTranslation(props.lng, "common");
   const customTheme = {
     default: {
@@ -41,6 +41,7 @@ export default function LoginPage(props: { lng: string }) {
         inputBorder: "rgb(51 65 85)",
         inputBorderFocus: "rgb(81 95 115)",
         inputBorderHover: "rgb(71 85 105)",
+        inputBackground: "rgb(15 23 42)",
         inputText: "white",
         inputLabelText: "white",
         dividerBackground: "rgb(51 65 85)",
@@ -59,6 +60,7 @@ export default function LoginPage(props: { lng: string }) {
         inputBorder: "rgb(51 65 85)",
         inputBorderFocus: "rgb(81 95 115)",
         inputBorderHover: "rgb(71 85 105)",
+        inputBackground: "rgb(15 23 42)",
         inputText: "white",
         inputLabelText: "white",
         dividerBackground: "rgb(51 65 85)",
@@ -88,13 +90,20 @@ export default function LoginPage(props: { lng: string }) {
           </span>
 
           <Auth
-            theme={theme === "dark" ? "dark" : "light"}
+            theme={
+              theme === "dark"
+                ? "dark"
+                : theme === "system"
+                ? systemTheme
+                : "light"
+            }
             supabaseClient={supabase}
             appearance={{
               theme: ThemeSupa,
               variables: customTheme,
             }}
-            socialLayout="horizontal"
+            providers={["github", "google"]}
+            socialLayout="vertical"
             redirectTo="https://account.peyronnet.group/auth/callback"
           />
         </div>
