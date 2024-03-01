@@ -105,6 +105,37 @@ export default function LoginPage(props: { lng: string }) {
             providers={["github", "google"]}
             socialLayout="vertical"
             redirectTo="https://account.peyronnet.group/auth/callback"
+            localization={{
+              variables: {
+                sign_up: {
+                  social_provider_text: t("login-social"),
+                  email_input_placeholder: t("email-input-placeholder"),
+                  password_input_placeholder: t("password-input-placeholder"),
+                  button_label: t("sign-up"),
+                  link_text: t("link-text"),
+                  password_label: t("create-password-label"),
+                  email_label: t("email-label"),
+                },
+                sign_in: {
+                  social_provider_text: t("login-social"),
+                  email_input_placeholder: t("email-input-placeholder"),
+                  password_input_placeholder: t("password-input-placeholder"),
+                  button_label: t("sign-in"),
+                  link_text: t("sign-in-link-text"),
+                  password_label: t("password-input-placeholder"),
+                  email_label: t("email-label"),
+                },
+                forgotten_password: {
+                  password_label: t("password-input-placeholder"),
+                  email_label: t("email-label"),
+                  email_input_placeholder: t("email-input-placeholder"),
+                  loading_button_label: t("password-loading-button-label"),
+                  link_text: t("password-link-text"),
+                  confirmation_text: t("password-confirmation-text"),
+                  button_label: t("password-button-label"),
+                },
+              },
+            }}
           />
         </div>
       </section>

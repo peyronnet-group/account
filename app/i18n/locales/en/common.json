@@ -46,5 +46,20 @@
   "privacy-policy": "Privacy policy",
   "links": "Links",
   "socials": "Socials",
-  "terms-sell": "Terms and conditions of sale"
+  "terms-sell": "Terms and conditions of sale",
+  "login-social": "Sign in with {{provider}}",
+  "link-text": "Don't have an account? Sign up",
+  "sign-in-link-text": "Already have an account? Sign in",
+  "email-label": "Email address",
+  "create-password-label": "Create a Password",
+  "email-input-placeholder": "Your email address",
+  "password-input-placeholder": "Your password",
+  "confirmation-text": "Check your email for the confirmation link",
+  "password-email-label": "Email address",
+  "password-password-label": "Your Password",
+  "password-email-input-placeholder": "Your email address",
+  "password-button-label": "Send reset password instructions",
+  "password-loading-button-label": "Sending reset instructions ...",
+  "password-link-text": "Forgot your password?",
+  "password-confirmation-text": "Check your email for the password reset link"
 }

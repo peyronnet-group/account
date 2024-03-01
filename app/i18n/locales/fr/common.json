@@ -47,5 +47,17 @@
   "links": "Liens",
   "socials": "Réseaux Sociaux",
   "terms-sell": "Conditions générales de vente",
-  "welcome-msg": "Bienvenue, {{user}}."
+  "welcome-msg": "Bienvenue, {{user}}.",
+  "login-social": "Se connecter avec {{provider}}",
+  "link-text": "Vous n'avez pas de compte ? S'inscrire",
+  "sign-in-link-text": "Vous avez déjà un compte ? Se connecter",
+  "email-label": "Adresse mail",
+  "create-password-label": "Créer un mot de passe",
+  "email-input-placeholder": "Votre adresse mail",
+  "password-input-placeholder": "Votre mot de passe",
+  "confirmation-text": "Vérifiez votre email pour le lien de confirmation",
+  "password-button-label": "Envoyer les instructions de réinitialisation du mot de passe",
+  "password-loading-button-label": "Envoi des instructions de réinitialisation en cours...",
+  "password-link-text": "Mot de passe oublié ?",
+  "password-confirmation-text": "Vérifiez votre mail pour le lien de réinitialisation du mot de passe"
 }
