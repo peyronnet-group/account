@@ -9,6 +9,7 @@ import { useState } from "react";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "@/app/i18n/client";
+import PricingFeatures from "./features";
 
 type Subscription = Database["public"]["Tables"]["subscriptions"]["Row"];
 type Product = Database["public"]["Tables"]["products"]["Row"];
@@ -28,6 +29,7 @@ interface Props {
   user: User | null | undefined;
   products: ProductWithPrices[];
   subscriptions: SubscriptionWithProduct[] | null;
+  lng: string;
 }
 
 type BillingInterval = "lifetime" | "year" | "month";
@@ -37,8 +39,9 @@ export default function Pricing({
   user,
   products,
   subscriptions,
+  lng,
 }: Props) {
-  const { t } = useTranslation("fr", "common");
+  const { t } = useTranslation(lng, "common");
   const intervals = Array.from(
     new Set(
       products.flatMap((product) =>
@@ -64,21 +67,29 @@ export default function Pricing({
   const handleCheckout = async (price: Price) => {
     setPriceIdLoading(price.id);
     if (!user) {
-      return router.push("/login");
+      return router.push(`/${lng}/login`);
     }
 
     if (subscriptions) {
       for (let i = 0; i < subscriptions?.length; i++) {
         if (subscriptions[i]?.prices?.product_id === price.product_id) {
-          return router.push("/me");
+          return router.push(`/${lng}/me`);
         }
       }
     }
-
+    let trial = true;
+    if (subscriptions) {
+      for (let i = 0; i < subscriptions.length; i++) {
+        if (subscriptions[i].trial_end) {
+          trial = false;
+          return;
+        }
+      }
+    }
     try {
       const { sessionId } = await postData({
         url: "/api/create-checkout-session",
-        data: { price },
+        data: { price, trial },
       });
 
       const stripe = await getStripe();
@@ -140,20 +151,25 @@ export default function Pricing({
         </div>
         <div className="mt-12 space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mx-0 xl:grid-cols-3">
           {products.map((product) => {
+            if (!product.name?.toLowerCase().includes("write")) return <></>;
+
             const price = product?.prices?.find(
               (price) => price.interval === billingInterval
             );
             if (!price) return null;
-            const priceString = new Intl.NumberFormat("en-US", {
-              style: "currency",
-              currency: price.currency!,
-              minimumFractionDigits: 0,
-            }).format((price?.unit_amount || 0) / 100);
+            const priceString = new Intl.NumberFormat(
+              lng === "fr" ? "fr-FR" : "en-US",
+              {
+                style: "currency",
+                currency: price.currency!,
+                minimumFractionDigits: 2,
+              }
+            ).format((price?.unit_amount || 0) / 100);
             return (
               <div
                 key={product.id}
                 className={cn(
-                  "rounded-lg shadow-sm divide-y border border-slate-300 dark:border-slate-700 bg-white divide-slate-100 dark:divide-slate-600 dark:bg-slate-900",
+                  "divide-y divide-slate-100 rounded-lg border border-slate-300 bg-white shadow-sm dark:divide-slate-600 dark:border-slate-700 dark:bg-slate-900",
                   {
                     "border border-blue-500": subscriptions
                       ? isSubscribedToProduct(product.id)
@@ -162,24 +178,34 @@ export default function Pricing({
                 )}
               >
                 <div className="p-6">
-                  <h2 className="text-2xl font-semibold leading-6 dark:text-white">
-                    {product.name}
-                  </h2>
+                  <span className="flex items-center space-x-2">
+                    <h2 className="text-2xl font-semibold leading-6 dark:text-white">
+                      {product.name}
+                    </h2>
+                    {subscriptions?.length === 0 ? (
+                      <p className="rounded-full bg-blue-500 px-2 text-sm text-white">
+                        {t("free-trial")}
+                      </p>
+                    ) : (
+                      <></>
+                    )}
+                  </span>
                   <p className="mt-4 dark:text-slate-300">
                     {product.description}
                   </p>
                   <p className="mt-8">
-                    <span className="text-3xl font-bold white">
+                    <span className="white text-3xl font-bold">
                       {priceString}
                     </span>
                     <span className="text-base font-medium dark:text-slate-100">
-                      /{billingInterval}
+                      /{t(billingInterval)}
                     </span>
                   </p>
+                  <PricingFeatures lng={lng} productName={product.name} />
                   <Button
                     type="button"
                     onClick={() => handleCheckout(price)}
-                    className="block w-full py-2 mt-8 text-sm font-semibold text-center text-white rounded-md hover:bg-slate-900"
+                    className="mt-8 block w-full rounded-md py-2 text-center text-sm font-semibold text-white hover:bg-slate-900"
                   >
                     {isSubscribedToProduct(product.id)
                       ? t("manage")

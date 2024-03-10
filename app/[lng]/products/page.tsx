@@ -20,6 +20,7 @@ export default async function PricingPage({
   return (
     <>
       <Pricing
+        lng={lng}
         session={session}
         user={session?.user}
         products={products}
