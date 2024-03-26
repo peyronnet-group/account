@@ -194,11 +194,11 @@ const manageInvoicePaid = async (
   const subscription = await stripe.subscriptions.retrieve(subscriptionId, {
     expand: ["default_payment_method"],
   });
-  let period =
-    subscription.current_period_start - subscription.current_period_end;
+
   // Upsert the latest status of the subscription object.
   const userData: Database["public"]["Tables"]["users"]["Update"] = {
-    write_gpt4_quota: period > 2764800 ? 120 : 10, // if more than 2764800, then this is a yearly subscription
+    write_gpt4_quota:
+      subscription.items.data[0].plan.interval === "year" ? 120 : 10,
   };
 
   const { error } = await supabaseAdmin
