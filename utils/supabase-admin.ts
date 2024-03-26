@@ -177,9 +177,42 @@ const manageSubscriptionStatusChange = async (
     );
 };
 
+const manageInvoicePaid = async (
+  subscriptionId: string,
+  customerId: string
+) => {
+  // Get customer's UUID from mapping table.
+  const { data: customerData, error: noCustomerError } = await supabaseAdmin
+    .from("customers")
+    .select("id")
+    .eq("stripe_customer_id", customerId)
+    .single();
+  if (noCustomerError) throw noCustomerError;
+
+  const { id: uuid } = customerData!;
+
+  const subscription = await stripe.subscriptions.retrieve(subscriptionId, {
+    expand: ["default_payment_method"],
+  });
+  let period =
+    subscription.current_period_start - subscription.current_period_end;
+  // Upsert the latest status of the subscription object.
+  const userData: Database["public"]["Tables"]["users"]["Update"] = {
+    write_gpt4_quota: period > 2764800 ? 120 : 10, // if more than 2764800, then this is a yearly subscription
+  };
+
+  const { error } = await supabaseAdmin
+    .from("users")
+    .update(userData)
+    .eq("id", uuid);
+  if (error) throw error;
+  console.log(`Updated user ${uuid}.`);
+};
+
 export {
   upsertProductRecord,
   upsertPriceRecord,
   createOrRetrieveCustomer,
   manageSubscriptionStatusChange,
+  manageInvoicePaid,
 };
