@@ -194,11 +194,27 @@ const manageInvoicePaid = async (
   const subscription = await stripe.subscriptions.retrieve(subscriptionId, {
     expand: ["default_payment_method"],
   });
+  let product = subscription.items.data[0].price.product as Stripe.Product;
+  let yearQuota = 120;
+  let monthQuota = 10;
 
+  if (product.name.includes("synapsy write")) {
+    if (product.name.includes("basic")) {
+      yearQuota = 120;
+      monthQuota = 10;
+    } else if (product.name.includes("premium")) {
+      yearQuota = 240;
+      monthQuota = 20;
+    }
+  } else {
+    return;
+  }
   // Upsert the latest status of the subscription object.
   const userData: Database["public"]["Tables"]["users"]["Update"] = {
     write_gpt4_quota:
-      subscription.items.data[0].plan.interval === "year" ? 120 : 10,
+      subscription.items.data[0].plan.interval === "year"
+        ? yearQuota
+        : monthQuota,
   };
 
   const { error } = await supabaseAdmin
