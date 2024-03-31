@@ -85,5 +85,6 @@
   "export-gens": "Export Generations",
   "import-gens": "Import Generations",
   "print-generations": "Print Generations",
-  "pricing-desc": "You need a subscription plan to use Synapsy Write."
+  "pricing-desc": "You need a subscription plan to use Synapsy Write.",
+  "unlimited": "Unlimited"
 }
