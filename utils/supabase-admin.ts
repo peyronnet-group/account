@@ -198,11 +198,11 @@ const manageInvoicePaid = async (
   let yearQuota = 120;
   let monthQuota = 10;
 
-  if (product.name.includes("synapsy write")) {
-    if (product.name.includes("basic")) {
+  if (product.name.toLowerCase().includes("synapsy write")) {
+    if (product.name.toLowerCase().includes("basic")) {
       yearQuota = 120;
       monthQuota = 10;
-    } else if (product.name.includes("premium")) {
+    } else if (product.name.toLowerCase().includes("premium")) {
       yearQuota = 240;
       monthQuota = 20;
     }
