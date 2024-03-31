@@ -67,8 +67,9 @@ export async function POST(req: Request) {
           break;
         case "invoice.paid":
           const invoice = event.data.object as Stripe.Invoice;
-          const sub = invoice.subscription as Stripe.Subscription;
-          await manageInvoicePaid(sub.id, sub.customer as string);
+          const sub = invoice.subscription as string;
+
+          await manageInvoicePaid(sub, invoice.customer as string);
           break;
         default:
           throw new Error("Unhandled relevant event!");
@@ -76,7 +77,7 @@ export async function POST(req: Request) {
     } catch (error) {
       console.log(error);
       return new Response(
-        "Webhook handler failed. View your nextjs function logs. " + error,
+        `Webhook handler failed. View your nextjs function logs. ${error}`,
         {
           status: 400,
         }

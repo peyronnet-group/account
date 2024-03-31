@@ -194,7 +194,9 @@ const manageInvoicePaid = async (
   const subscription = await stripe.subscriptions.retrieve(subscriptionId, {
     expand: ["default_payment_method"],
   });
-  let product = subscription.items.data[0].price.product as Stripe.Product;
+  const product = await stripe.products.retrieve(
+    subscription.items.data[0].price.product as string
+  );
   let yearQuota = 120;
   let monthQuota = 10;
 
