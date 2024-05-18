@@ -62,6 +62,7 @@ export default function Pricing({
         }
       }
     }
+    return false;
   }
 
   const handleCheckout = async (price: Price) => {
@@ -205,7 +206,7 @@ export default function Pricing({
                   <Button
                     type="button"
                     onClick={() => handleCheckout(price)}
-                    className="mt-8 block w-full rounded-md py-2 text-center text-sm font-semibold text-white hover:bg-slate-900"
+                    className="mt-8 block w-full rounded-md py-2 text-center text-sm font-semibold text-white"
                   >
                     {isSubscribedToProduct(product.id)
                       ? t("manage")
