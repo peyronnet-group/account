@@ -14,7 +14,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ReactNode } from "react";
 import ManageSubscriptionButton from "./ManageSubscriptionButton";
-import { ExternalLink } from "lucide-react";
+import { Calendar, Currency, ExternalLink, Info } from "lucide-react";
 import Image from "next/image";
 
 export default async function Account({
@@ -115,21 +115,37 @@ export default async function Account({
                 {subscriptions.map((subscription) => (
                   <div
                     key={subscription.id}
-                    className="p-4 rounded-md border dark:border-slate-700"
+                    className="rounded-md border p-4 dark:border-slate-700"
                   >
-                    <h3 className="font-bold text-xl">
+                    <h3 className="text-xl font-bold">
                       {subscription?.prices?.products?.name}
                     </h3>
-                    <p>{`${new Intl.NumberFormat(
-                      lng === "fr" ? "fr-FR" : "en-US",
-                      {
-                        style: "currency",
-                        currency: subscription?.prices?.currency!,
-                        minimumFractionDigits: 0,
-                      }
-                    ).format((subscription?.prices?.unit_amount || 0) / 100)}/${
-                      subscription?.prices?.interval
-                    }`}</p>
+                    <div className="grid grid-cols-[auto,1fr] items-center gap-x-1">
+                      <Currency size={14} />
+                      <p>{`${new Intl.NumberFormat(
+                        lng === "fr" ? "fr-FR" : "en-US",
+                        {
+                          style: "currency",
+                          currency: subscription?.prices?.currency!,
+                          minimumFractionDigits: 0,
+                        }
+                      ).format(
+                        (subscription?.prices?.unit_amount || 0) / 100
+                      )}/${t(subscription?.prices?.interval ?? "month")}`}</p>
+                      <Info size={14} />
+                      <p>{t(subscription.status ?? "active")}</p>
+                      <Calendar size={14} />
+                      <p>
+                        {new Date(
+                          subscription.current_period_end
+                        ).toLocaleDateString(
+                          lng === "fr" ? "fr-FR" : "en-US"
+                        )}{" "}
+                        {new Date(
+                          subscription.current_period_end
+                        ).toLocaleTimeString(lng === "fr" ? "fr-FR" : "en-US")}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>

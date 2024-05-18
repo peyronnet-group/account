@@ -88,5 +88,13 @@
   "pricing-desc": "You need a subscription plan to use Synapsy Write.",
   "unlimited": "Unlimited",
   "peyronnet-apps": "Peyronnet Apps",
-  "peyronnet-apps-desc": "Find all your favorite Peyronnet Apps here."
+  "peyronnet-apps-desc": "Find all your favorite Peyronnet Apps here.",
+  "active": "Active",
+  "trialing": "Trialing",
+  "canceled": "Canceled",
+  "incomplete": "Incomplete",
+  "incomplete_expired": "Incomplete Expired",
+  "past_due": "Past Due",
+  "unpaid": "Unpaid",
+  "paused": "Paused"
 }
