@@ -86,5 +86,7 @@
   "import-gens": "Import Generations",
   "print-generations": "Print Generations",
   "pricing-desc": "You need a subscription plan to use Synapsy Write.",
-  "unlimited": "Unlimited"
+  "unlimited": "Unlimited",
+  "peyronnet-apps": "Peyronnet Apps",
+  "peyronnet-apps-desc": "Find all your favorite Peyronnet Apps here."
 }
