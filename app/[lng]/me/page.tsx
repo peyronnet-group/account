@@ -14,6 +14,8 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ReactNode } from "react";
 import ManageSubscriptionButton from "./ManageSubscriptionButton";
+import { ExternalLink } from "lucide-react";
+import Image from "next/image";
 
 export default async function Account({
   params: { lng },
@@ -75,6 +77,29 @@ export default async function Account({
         </p>
       </div>
       <div className="p-4">
+        <div className="m-auto w-full max-w-3xl mt-4 p-4 rounded-md border border-slate-200 dark:border-slate-700">
+          <h3 className="font-bold">{t("peyronnet-apps")}</h3>
+          <p className="text-slate-700 dark:text-slate-300 font-serif mb-2">
+            {t("peyronnet-apps-desc")}
+          </p>
+          <div className="flex">
+            <Link href="https://write.peyronnet.group/me">
+              <Button
+                variant="outline"
+                className="flex items-center space-x-2 px-2"
+              >
+                <Image
+                  alt="Synapsy Logo"
+                  width={24}
+                  height={24}
+                  src="/synapsy.png"
+                />
+                <span>Synapsy Write</span>
+                <ExternalLink height={12} />
+              </Button>
+            </Link>
+          </div>
+        </div>
         <Card
           title={t("products")}
           description={
