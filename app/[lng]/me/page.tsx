@@ -14,6 +14,8 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ReactNode } from "react";
 import ManageSubscriptionButton from "./ManageSubscriptionButton";
+import { Calendar, Currency, ExternalLink, Info } from "lucide-react";
+import Image from "next/image";
 
 export default async function Account({
   params: { lng },
@@ -75,6 +77,29 @@ export default async function Account({
         </p>
       </div>
       <div className="p-4">
+        <div className="m-auto w-full max-w-3xl mt-4 p-4 rounded-md border border-slate-200 dark:border-slate-700">
+          <h3 className="font-bold">{t("peyronnet-apps")}</h3>
+          <p className="text-slate-700 dark:text-slate-300 font-serif mb-2">
+            {t("peyronnet-apps-desc")}
+          </p>
+          <div className="flex">
+            <Link href="https://write.peyronnet.group/me">
+              <Button
+                variant="outline"
+                className="flex items-center space-x-2 px-2"
+              >
+                <Image
+                  alt="Synapsy Logo"
+                  width={24}
+                  height={24}
+                  src="/synapsy.png"
+                />
+                <span>Synapsy Write</span>
+                <ExternalLink height={12} />
+              </Button>
+            </Link>
+          </div>
+        </div>
         <Card
           title={t("products")}
           description={
@@ -90,21 +115,37 @@ export default async function Account({
                 {subscriptions.map((subscription) => (
                   <div
                     key={subscription.id}
-                    className="p-4 rounded-md border dark:border-slate-700"
+                    className="rounded-md border p-4 dark:border-slate-700"
                   >
-                    <h3 className="font-bold text-xl">
+                    <h3 className="text-xl font-bold">
                       {subscription?.prices?.products?.name}
                     </h3>
-                    <p>{`${new Intl.NumberFormat(
-                      lng === "fr" ? "fr-FR" : "en-US",
-                      {
-                        style: "currency",
-                        currency: subscription?.prices?.currency!,
-                        minimumFractionDigits: 0,
-                      }
-                    ).format((subscription?.prices?.unit_amount || 0) / 100)}/${
-                      subscription?.prices?.interval
-                    }`}</p>
+                    <div className="grid grid-cols-[auto,1fr] items-center gap-x-1">
+                      <Currency size={14} />
+                      <p>{`${new Intl.NumberFormat(
+                        lng === "fr" ? "fr-FR" : "en-US",
+                        {
+                          style: "currency",
+                          currency: subscription?.prices?.currency!,
+                          minimumFractionDigits: 0,
+                        }
+                      ).format(
+                        (subscription?.prices?.unit_amount || 0) / 100
+                      )}/${t(subscription?.prices?.interval ?? "month")}`}</p>
+                      <Info size={14} />
+                      <p>{t(subscription.status ?? "active")}</p>
+                      <Calendar size={14} />
+                      <p>
+                        {new Date(
+                          subscription.current_period_end
+                        ).toLocaleDateString(
+                          lng === "fr" ? "fr-FR" : "en-US"
+                        )}{" "}
+                        {new Date(
+                          subscription.current_period_end
+                        ).toLocaleTimeString(lng === "fr" ? "fr-FR" : "en-US")}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
