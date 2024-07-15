@@ -180,7 +180,7 @@ export default function Pricing({
               >
                 <div className="p-6">
                   <span className="flex items-center space-x-2">
-                    <h2 className="text-2xl font-semibold leading-6 dark:text-white">
+                    <h2 className="text-xl font-semibold leading-6 dark:text-white">
                       {product.name}
                     </h2>
                     {subscriptions?.length === 0 ? (
