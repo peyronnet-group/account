@@ -58,6 +58,14 @@ export function SheetMenu(props: { lng: string }) {
           {t("my-account")}
         </Link>
         <Link
+          href={"/products"}
+          className={cn(
+            "flex items-center px-2 text-lg font-semibold text-slate-200-foreground"
+          )}
+        >
+          {t("products")}
+        </Link>
+        <Link
           href={"https://leocorporation.dev"}
           className={cn(
             "flex items-center px-2 text-lg font-semibold text-slate-200-foreground"
@@ -94,6 +102,18 @@ export function NavMenu(props: { lng: string }) {
                 }
               >
                 {t("my-account")}
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <Link href="/products" legacyBehavior passHref>
+              <NavigationMenuLink
+                className={
+                  "bg-transparent dark:bg-transparent " +
+                  navigationMenuTriggerStyle()
+                }
+              >
+                {t("products")}
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
