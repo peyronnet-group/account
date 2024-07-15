@@ -10,6 +10,13 @@ import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "@/app/i18n/client";
 import PricingFeatures from "./features";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
 
 type Subscription = Database["public"]["Tables"]["subscriptions"]["Row"];
 type Product = Database["public"]["Tables"]["products"]["Row"];
@@ -53,6 +60,33 @@ export default function Pricing({
   const [billingInterval, setBillingInterval] =
     useState<BillingInterval>("month");
   const [priceIdLoading, setPriceIdLoading] = useState<string>();
+  const [selectedCurrency, setSelectedCurrency] = useState("eur");
+  const [currencies, setCurrencies] = useState(getCurrencies());
+
+  function getCurrencies() {
+    let cs: (string | null)[] = []; // all currencies available
+    for (let i = 0; i < products.length; i++) {
+      for (let j = 0; j < products[i].prices.length; j++) {
+        if (
+          products[i].prices[j].currency !== null &&
+          !cs.includes(products[i].prices[j].currency)
+        ) {
+          cs.push(products[i].prices[j].currency);
+        }
+      }
+    }
+    return cs;
+  }
+
+  function currencyToString(cur: string): string {
+    switch (cur) {
+      case "eur":
+        return "Euro";
+
+      default:
+        return cur.toUpperCase();
+    }
+  }
 
   function isSubscribedToProduct(productId: string) {
     if (subscriptions) {
@@ -121,6 +155,7 @@ export default function Pricing({
             {t("available-products")}
           </h2>
           <p className="font-serif">{t("available-products-desc")}</p>
+
           <div className="relative self-center mt-6 dark:bg-slate-900 rounded-lg p-0.5 flex sm:mt-8 border dark:border-slate-800">
             {intervals.includes("month") && (
               <button
@@ -148,6 +183,42 @@ export default function Pricing({
                 {t("yearly-billing")}
               </button>
             )}
+            <div className="items-center sm:flex mr-1 hidden">
+              <Select
+                defaultValue={selectedCurrency}
+                value={selectedCurrency}
+                onValueChange={setSelectedCurrency}
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {currencies.map((currency, k) => (
+                    <SelectItem value={currency ?? "eur"} key={k}>
+                      {currencyToString(currency ?? "eur")}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          <div className="items-center flex py-2 sm:hidden">
+            <Select
+              defaultValue={selectedCurrency}
+              value={selectedCurrency}
+              onValueChange={setSelectedCurrency}
+            >
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {currencies.map((currency, k) => (
+                  <SelectItem value={currency ?? "eur"} key={k}>
+                    {currencyToString(currency ?? "eur")}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
         </div>
         <div className="mt-12 space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mx-0 xl:grid-cols-3">
@@ -157,7 +228,7 @@ export default function Pricing({
             const price = product?.prices?.find(
               (price) => price.interval === billingInterval
             );
-            if (!price) return null;
+            if (!price || price.currency !== selectedCurrency) return null;
             const priceString = new Intl.NumberFormat(
               lng === "fr" ? "fr-FR" : "en-US",
               {
@@ -180,7 +251,7 @@ export default function Pricing({
               >
                 <div className="p-6">
                   <span className="flex items-center space-x-2">
-                    <h2 className="text-2xl font-semibold leading-6 dark:text-white">
+                    <h2 className="text-xl font-semibold leading-6 dark:text-white">
                       {product.name}
                     </h2>
                     {subscriptions?.length === 0 ? (
@@ -254,7 +325,7 @@ function LogoCloud() {
             <img
               src="/vercel.svg"
               alt="Vercel.com Logo"
-              className="h-6 dark:text-white text-black hidden dark:block"
+              className="h-6 dark:text-white hidden dark:block"
             />
           </a>
         </div>
