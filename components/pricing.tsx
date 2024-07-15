@@ -325,7 +325,7 @@ function LogoCloud() {
             <img
               src="/vercel.svg"
               alt="Vercel.com Logo"
-              className="h-6 dark:text-white text-black hidden dark:block"
+              className="h-6 dark:text-white hidden dark:block"
             />
           </a>
         </div>
