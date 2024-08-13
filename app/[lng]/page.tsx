@@ -28,7 +28,7 @@ export default function Home({ params: { lng } }: { params: { lng: any } }) {
             <Title className="text-center">{t("home-headline")}</Title>
             <Paragraph className="text-center">{t("home-desc")}</Paragraph>
             <span className="flex justify-center m-2">
-              <Link href="/login">
+              <Link href="/signin">
                 <Button>{t("sign-in")}</Button>
               </Link>
             </span>
