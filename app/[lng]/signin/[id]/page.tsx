@@ -16,14 +16,16 @@ import OauthSignIn from "@/components/ui/AuthForms/OauthSignIn";
 import ForgotPassword from "@/components/ui/AuthForms/ForgotPassword";
 import UpdatePassword from "@/components/ui/AuthForms/UpdatePassword";
 import SignUp from "@/components/ui/AuthForms/Signup";
+import { useTranslation } from "@/app/i18n";
 
 export default async function SignIn({
   params,
   searchParams,
 }: {
-  params: { id: string };
+  params: { id: string; lng: string };
   searchParams: { disable_button: boolean };
 }) {
+  const { t } = await useTranslation(params.lng, "common");
   const { allowOauth, allowEmail, allowPassword } = getAuthTypes();
   const viewTypes = getViewTypes();
   const redirectMethod = getRedirectMethod();
@@ -55,7 +57,7 @@ export default async function SignIn({
   }
 
   return (
-    <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
+    <div className="w-full lg:grid lg:grid-cols-2">
       <div className="flex items-center justify-center py-12">
         <div className="mx-auto grid w-[350px] gap-6">
           <div className="grid gap-2 text-center">
@@ -65,22 +67,24 @@ export default async function SignIn({
                 : viewProp === "update_password"
                 ? "Update Password"
                 : viewProp === "signup"
-                ? "Sign Up"
-                : "Sign In"}
+                ? t("sign-up")
+                : t("sign-in")}
             </h1>
-            <p className="text-balance text-muted-foreground">
-              Enter your email below to login to your account
+            <p className="text-slate-500 dark:text-slate-400">
+              {t("email-sign-in")}
             </p>
           </div>
-          <div className="grid gap-4">
+          <div className="grid gap-2">
             {viewProp === "password_signin" && (
               <PasswordSignIn
+                lng={params.lng}
                 allowEmail={allowEmail}
                 redirectMethod={redirectMethod}
               />
             )}
             {viewProp === "email_signin" && (
               <EmailSignIn
+                lng={params.lng}
                 allowPassword={allowPassword}
                 redirectMethod={redirectMethod}
                 disableButton={searchParams.disable_button}
@@ -97,13 +101,17 @@ export default async function SignIn({
               <UpdatePassword redirectMethod={redirectMethod} />
             )}
             {viewProp === "signup" && (
-              <SignUp allowEmail={allowEmail} redirectMethod={redirectMethod} />
+              <SignUp
+                lng={params.lng}
+                allowEmail={allowEmail}
+                redirectMethod={redirectMethod}
+              />
             )}
             {viewProp !== "update_password" &&
               viewProp !== "signup" &&
               allowOauth && (
                 <>
-                  <Separator text="Third-party sign-in" />
+                  <Separator text={t("third-party-providers")} />
                   <OauthSignIn />
                 </>
               )}
