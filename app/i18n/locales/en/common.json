@@ -49,7 +49,9 @@
   "terms-sell": "Terms and conditions of sale",
   "login-social": "Sign in with {{provider}}",
   "link-text": "Don't have an account? Sign up",
+  "link-text-2": "Don't have an account?",
   "sign-in-link-text": "Already have an account? Sign in",
+  "sign-in-link-text-é": "Already have an account?",
   "email-label": "Email address",
   "create-password-label": "Create a Password",
   "email-input-placeholder": "Your email address",
@@ -96,5 +98,10 @@
   "incomplete_expired": "Incomplete Expired",
   "past_due": "Past Due",
   "unpaid": "Unpaid",
-  "paused": "Paused"
+  "paused": "Paused",
+  "password-label": "Password",
+  "sign-in-magic": "Sign in via magic link",
+  "third-party-providers": "Third-party sign-in",
+  "email-sign-in": "Enter your email below to login to your account",
+  "sign-email-password": "Sign in with email and password"
 }
