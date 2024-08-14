@@ -1,6 +1,6 @@
 import {
   JetBrains_Mono as FontMono,
-  Lexend_Deca as FontSans,
+  Manrope as FontSans,
   Lora as FontSerif,
   Lexend_Zetta as FontWide,
 } from "next/font/google";

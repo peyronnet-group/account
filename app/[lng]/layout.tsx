@@ -4,7 +4,6 @@ import { fontSans, fontSerif, fontWide } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SiteHeader } from "@/components/site-header";
-import SupabaseProvider from "../supabase-provider";
 
 export const metadata: Metadata = {
   title: "Account | Peyronnet Group",
@@ -32,14 +31,12 @@ export default function RootLayout({
           fontSerif.variable
         )}
       >
-        <SupabaseProvider>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <div className="relative flex min-h-screen flex-col">
-              <SiteHeader lng={lng} />
-              <div className="flex-1">{children}</div>
-            </div>
-          </ThemeProvider>
-        </SupabaseProvider>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <div className="relative flex min-h-screen flex-col">
+            <SiteHeader lng={lng} />
+            <div className="flex-1">{children}</div>
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );
