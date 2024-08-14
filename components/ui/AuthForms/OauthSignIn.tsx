@@ -35,7 +35,7 @@ export default function OauthSignIn() {
   };
 
   return (
-    <div className="mt-8">
+    <div>
       {oAuthProviders.map((provider) => (
         <form
           key={provider.name}

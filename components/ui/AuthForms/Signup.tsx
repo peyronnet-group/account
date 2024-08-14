@@ -7,14 +7,23 @@ import { signUp } from "@/utils/auth-helpers/server";
 import { handleRequest } from "@/utils/auth-helpers/client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useTranslation } from "@/app/i18n/client";
+import { Input } from "../input";
+import Separator from "./Separator";
 
 // Define prop type with allowEmail boolean
 interface SignUpProps {
   allowEmail: boolean;
   redirectMethod: string;
+  lng: string;
 }
 
-export default function SignUp({ allowEmail, redirectMethod }: SignUpProps) {
+export default function SignUp({
+  allowEmail,
+  redirectMethod,
+  lng,
+}: SignUpProps) {
+  const { t } = useTranslation(lng, "common");
   const router = redirectMethod === "client" ? useRouter() : null;
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -33,43 +42,38 @@ export default function SignUp({ allowEmail, redirectMethod }: SignUpProps) {
       >
         <div className="grid gap-2">
           <div className="grid gap-1">
-            <label htmlFor="email">Email</label>
-            <input
+            <label htmlFor="email">{t("email-label")}</label>
+            <Input
               id="email"
-              placeholder="name@example.com"
+              placeholder={t("email-input-placeholder")}
               type="email"
               name="email"
               autoCapitalize="none"
               autoComplete="email"
               autoCorrect="off"
-              className="w-full p-3 rounded-md bg-zinc-800"
             />
-            <label htmlFor="password">Password</label>
-            <input
+            <label htmlFor="password">{t("password-label")}</label>
+            <Input
               id="password"
-              placeholder="Password"
+              placeholder={t("password-input-placeholder")}
               type="password"
               name="password"
               autoComplete="current-password"
-              className="w-full p-3 rounded-md bg-zinc-800"
             />
           </div>
           <Button type="submit" className="mt-1">
-            Sign up
+            {t("sign-up")}
           </Button>
         </div>
       </form>
-      <p>Already have an account?</p>
-      <p>
-        <Link href="/signin/password_signin" className="font-light text-sm">
-          Sign in with email and password
-        </Link>
+      <Separator text={t("sign-in-link-text-2")} />
+
+      <p className="font-light text-sm text-center">
+        <Link href="/signin/password_signin">{t("sign-email-password")}</Link>
       </p>
       {allowEmail && (
-        <p>
-          <Link href="/signin/email_signin" className="font-light text-sm">
-            Sign in via magic link
-          </Link>
+        <p className="font-light text-sm text-center">
+          <Link href="/signin/email_signin">{t("sign-in-magic")}</Link>
         </p>
       )}
     </div>

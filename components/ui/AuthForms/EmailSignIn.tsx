@@ -7,19 +7,23 @@ import { handleRequest } from "@/utils/auth-helpers/client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Input } from "../input";
+import { useTranslation } from "@/app/i18n/client";
 
 // Define prop type with allowPassword boolean
 interface EmailSignInProps {
   allowPassword: boolean;
   redirectMethod: string;
   disableButton?: boolean;
+  lng: string;
 }
 
 export default function EmailSignIn({
   allowPassword,
   redirectMethod,
   disableButton,
+  lng,
 }: EmailSignInProps) {
+  const { t } = useTranslation(lng, "common");
   const router = redirectMethod === "client" ? useRouter() : null;
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -38,10 +42,10 @@ export default function EmailSignIn({
       >
         <div className="grid gap-2">
           <div className="grid gap-1">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">{t("email-label")}</label>
             <Input
               id="email"
-              placeholder="name@example.com"
+              placeholder={t("email-input-placeholder")}
               type="email"
               name="email"
               autoCapitalize="none"
@@ -51,20 +55,21 @@ export default function EmailSignIn({
             />
           </div>
           <Button type="submit" className="mt-1" disabled={disableButton}>
-            Sign in
+            {t("sign-in")}
           </Button>
         </div>
       </form>
       {allowPassword && (
         <>
-          <p>
-            <Link href="/signin/password_signin" className="text-sm">
-              Sign in with email and password
+          <p className="font-light text-sm text-center underline">
+            <Link href="/signin/password_signin">
+              {t("sign-email-password")}
             </Link>
           </p>
-          <p>
-            <Link href="/signin/signup" className="text-sm">
-              Don't have an account? Sign up
+          <p className="text-center space-x-2 font-light text-sm">
+            <span>{t("link-text-2")}</span>
+            <Link href="/signin/signup" className="underline">
+              {t("sign-up")}
             </Link>
           </p>
         </>

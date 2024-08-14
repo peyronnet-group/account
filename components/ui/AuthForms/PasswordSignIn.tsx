@@ -7,17 +7,21 @@ import { handleRequest } from "@/utils/auth-helpers/client";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { Input } from "../input";
+import { useTranslation } from "@/app/i18n/client";
 
 // Define prop type with allowEmail boolean
 interface PasswordSignInProps {
   allowEmail: boolean;
   redirectMethod: string;
+  lng: string;
 }
 
 export default function PasswordSignIn({
   allowEmail,
   redirectMethod,
+  lng,
 }: PasswordSignInProps) {
+  const { t } = useTranslation(lng, "common");
   const router = redirectMethod === "client" ? useRouter() : null;
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -28,7 +32,7 @@ export default function PasswordSignIn({
   };
 
   return (
-    <div className="my-8">
+    <div className="mt-8">
       <form
         noValidate={true}
         className="mb-4"
@@ -36,47 +40,51 @@ export default function PasswordSignIn({
       >
         <div className="grid gap-2">
           <div className="grid gap-1">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">{t("email-label")}</label>
             <Input
               id="email"
-              placeholder="name@example.com"
+              placeholder={t("email-input-placeholder")}
               type="email"
               name="email"
               autoCapitalize="none"
               autoComplete="email"
               autoCorrect="off"
-              className="w-full p-3 rounded-md bg-zinc-800"
             />
-            <label htmlFor="password">Password</label>
+            <label
+              className="flex justify-between items-center"
+              htmlFor="password"
+            >
+              <p>{t("password-label")}</p>
+              <Link
+                href="/signin/forgot_password"
+                className="font-light text-sm underline"
+              >
+                {t("password-link-text")}
+              </Link>
+            </label>
             <Input
               id="password"
-              placeholder="Password"
+              placeholder={t("password-input-placeholder")}
               type="password"
               name="password"
               autoComplete="current-password"
-              className="w-full p-3 rounded-md bg-zinc-800"
             />
           </div>
           <Button type="submit" className="mt-1">
-            Sign in
+            {t("sign-in")}
           </Button>
         </div>
       </form>
-      <p>
-        <Link href="/signin/forgot_password" className="font-light text-sm">
-          Forgot your password?
-        </Link>
-      </p>
+
       {allowEmail && (
-        <p>
-          <Link href="/signin/email_signin" className="font-light text-sm">
-            Sign in via magic link
-          </Link>
+        <p className="font-light text-sm text-center">
+          <Link href="/signin/email_signin">{t("sign-in-magic")}</Link>
         </p>
       )}
-      <p>
-        <Link href="/signin/signup" className="font-light text-sm">
-          Don't have an account? Sign up
+      <p className="text-center space-x-2 font-light text-sm">
+        <span>{t("link-text-2")}</span>
+        <Link href="/signin/signup" className="underline">
+          {t("sign-up")}
         </Link>
       </p>
     </div>
