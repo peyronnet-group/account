@@ -18,6 +18,7 @@ import {
   SelectValue,
 } from "./ui/select";
 import { checkoutWithStripe } from "@/utils/stripe/server";
+import Image from "next/image";
 
 type Subscription = Tables<"subscriptions">;
 type Product = Tables<"products">;
@@ -316,12 +317,16 @@ function LogoCloud() {
       <div className="flex flex-col items-center my-12 space-y-4 sm:mt-8 sm:space-y-0 md:mx-auto md:max-w-2xl sm:grid sm:gap-6 sm:grid-cols-5">
         <div className="flex items-center justify-start">
           <a href="https://nextjs.org" aria-label="Next.js Link">
-            <img
+            <Image
+              height={48}
+              width={115}
               src="/next.svg"
               alt="Next.js Logo"
               className="h-12 dark:text-white text-black dark:hidden"
             />
-            <img
+            <Image
+              height={48}
+              width={115}
               src="/nextjs.svg"
               alt="Next.js Logo"
               className="h-12 dark:text-white text-black hidden dark:block"
@@ -330,12 +335,16 @@ function LogoCloud() {
         </div>
         <div className="flex items-center justify-start">
           <a href="https://vercel.com" aria-label="Vercel.com Link">
-            <img
+            <Image
+              height={48}
+              width={115}
               src="/vercell.svg"
               alt="Vercel.com Logo"
               className="h-6 dark:text-white text-black dark:hidden"
             />
-            <img
+            <Image
+              height={48}
+              width={115}
               src="/vercel.svg"
               alt="Vercel.com Logo"
               className="h-6 dark:text-white hidden dark:block"
@@ -344,12 +353,16 @@ function LogoCloud() {
         </div>
         <div className="flex items-center justify-start">
           <a href="https://stripe.com" aria-label="stripe.com Link">
-            <img
+            <Image
+              height={48}
+              width={115}
               src="/stripel.svg"
               alt="stripe.com Logo"
               className="h-12 dark:text-white text-black dark:hidden"
             />
-            <img
+            <Image
+              height={48}
+              width={115}
               src="/stripe.svg"
               alt="stripe.com Logo"
               className="h-12 dark:text-white text-black hidden dark:block"
@@ -358,12 +371,16 @@ function LogoCloud() {
         </div>
         <div className="flex items-center justify-start">
           <a href="https://supabase.io" aria-label="supabase.io Link">
-            <img
+            <Image
+              height={48}
+              width={115}
               src="/supabasel.svg"
               alt="supabase.io Logo"
               className="h-10 dark:text-white text-black dark:hidden"
             />
-            <img
+            <Image
+              height={48}
+              width={115}
               src="/supabase.svg"
               alt="supabase.io Logo"
               className="h-10 dark:text-white text-black hidden dark:block"
@@ -372,12 +389,16 @@ function LogoCloud() {
         </div>
         <div className="flex items-center justify-start">
           <a href="https://github.com" aria-label="github.com Link">
-            <img
+            <Image
+              height={48}
+              width={115}
               src="/github.svg"
               alt="github.com Logo"
               className="h-8 dark:text-white text-black hidden dark:block"
             />
-            <img
+            <Image
+              height={48}
+              width={115}
               src="/githubl.svg"
               alt="github.com Logo"
               className="h-8 dark:text-white text-black dark:hidden"

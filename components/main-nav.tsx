@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { Menu } from "lucide-react";
-import { useTheme } from "next-themes";
+import Image from "next/image";
 
 import { NavItem } from "@/types/nav";
 import { cn } from "@/lib/utils";
@@ -129,7 +129,7 @@ export function NavMenu(props: { lng: string }) {
                       className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b dark:from-slate-800 dark:to-slate-900 from-slate-200/50 to-slate-200 p-6 no-underline outline-none focus:shadow-md"
                       href="https://leocorporation.dev"
                     >
-                      <img
+                      <Image
                         height={128}
                         width={128}
                         src={"/Logo.svg"}
@@ -174,7 +174,7 @@ export function NavMenu(props: { lng: string }) {
                       className="flex h-full w-full select-none flex-col justify-end rounded-md dark:from-slate-800 dark:to-slate-900 bg-gradient-to-b from-slate-200/50 to-slate-200 p-6 no-underline outline-none focus:shadow-md"
                       href="https://dev.peyronnet.group"
                     >
-                      <img
+                      <Image
                         height={128}
                         width={128}
                         src={"/Devyus.png"}
