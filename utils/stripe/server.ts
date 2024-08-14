@@ -20,7 +20,8 @@ type CheckoutResponse = {
 
 export async function checkoutWithStripe(
   price: Price,
-  redirectPath: string = "/me"
+  redirectPath: string = "/me",
+  trial: boolean
 ): Promise<CheckoutResponse> {
   try {
     // Get the user from Supabase auth
@@ -66,14 +67,16 @@ export async function checkoutWithStripe(
 
     console.log(
       "Trial end:",
-      calculateTrialEndUnixTimestamp(price.trial_period_days)
+      calculateTrialEndUnixTimestamp(trial ? 2 : price.trial_period_days)
     );
     if (price.type === "recurring") {
       params = {
         ...params,
         mode: "subscription",
         subscription_data: {
-          trial_end: calculateTrialEndUnixTimestamp(price.trial_period_days),
+          trial_end: calculateTrialEndUnixTimestamp(
+            trial ? 2 : price.trial_period_days
+          ),
         },
       };
     } else if (price.type === "one_time") {

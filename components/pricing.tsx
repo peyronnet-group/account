@@ -1,10 +1,10 @@
 "use client";
 
-import { Database } from "@/types_db";
-import { postData } from "@/utils/helpers";
-import { getStripe } from "@/utils/stripe-client";
-import { Session, User } from "@supabase/supabase-js";
-import { useRouter } from "next/navigation";
+import { Tables } from "@/types_db";
+import { getErrorRedirect } from "@/utils/helpers";
+import { getStripe } from "@/utils/stripe/client";
+import { User } from "@supabase/supabase-js";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
@@ -17,10 +17,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
+import { checkoutWithStripe } from "@/utils/stripe/server";
 
-type Subscription = Database["public"]["Tables"]["subscriptions"]["Row"];
-type Product = Database["public"]["Tables"]["products"]["Row"];
-type Price = Database["public"]["Tables"]["prices"]["Row"];
+type Subscription = Tables<"subscriptions">;
+type Product = Tables<"products">;
+type Price = Tables<"prices">;
 interface ProductWithPrices extends Product {
   prices: Price[];
 }
@@ -32,7 +33,6 @@ interface SubscriptionWithProduct extends Subscription {
 }
 
 interface Props {
-  session: Session | null;
   user: User | null | undefined;
   products: ProductWithPrices[];
   subscriptions: SubscriptionWithProduct[] | null;
@@ -41,14 +41,9 @@ interface Props {
 
 type BillingInterval = "lifetime" | "year" | "month";
 
-export default function Pricing({
-  session,
-  user,
-  products,
-  subscriptions,
-  lng,
-}: Props) {
+export default function Pricing({ user, products, subscriptions, lng }: Props) {
   const { t } = useTranslation(lng, "common");
+  const currentPath = usePathname();
   const intervals = Array.from(
     new Set(
       products.flatMap((product) =>
@@ -102,7 +97,8 @@ export default function Pricing({
   const handleCheckout = async (price: Price) => {
     setPriceIdLoading(price.id);
     if (!user) {
-      return router.push(`/${lng}/signin`);
+      setPriceIdLoading(undefined);
+      return router.push(`/${lng}/signin/signup`);
     }
 
     if (subscriptions) {
@@ -122,11 +118,26 @@ export default function Pricing({
       }
     }
     try {
-      const { sessionId } = await postData({
-        url: "/api/create-checkout-session",
-        data: { price, trial },
-      });
+      const { errorRedirect, sessionId } = await checkoutWithStripe(
+        price,
+        currentPath,
+        trial
+      );
 
+      if (errorRedirect) {
+        setPriceIdLoading(undefined);
+        return router.push(errorRedirect);
+      }
+      if (!sessionId) {
+        setPriceIdLoading(undefined);
+        return router.push(
+          getErrorRedirect(
+            currentPath,
+            "An unknown error occurred.",
+            "Please try again later or contact a system administrator."
+          )
+        );
+      }
       const stripe = await getStripe();
       stripe?.redirectToCheckout({ sessionId });
     } catch (error) {
@@ -257,7 +268,7 @@ export default function Pricing({
                       {product.name}
                     </h2>
                     {subscriptions?.length === 0 ? (
-                      <p className="rounded-full bg-blue-500 px-2 text-sm text-white">
+                      <p className="rounded-full text-nowrap bg-blue-500 px-2 text-sm text-white">
                         {t("free-trial")}
                       </p>
                     ) : (
