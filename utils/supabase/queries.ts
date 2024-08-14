@@ -8,7 +8,7 @@ export const getUser = cache(async (supabase: SupabaseClient) => {
   return user;
 });
 
-export const getSubscription = cache(async (supabase: SupabaseClient) => {
+export const getSubscriptions = cache(async (supabase: SupabaseClient) => {
   try {
     const { data: subscription } = await supabase
       .from("subscriptions")

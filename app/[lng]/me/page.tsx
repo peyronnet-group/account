@@ -1,21 +1,27 @@
 import { useTranslation } from "@/app/i18n";
-import {
-  getSession,
-  getUserDetails,
-  getSubscriptions,
-} from "@/app/supabase-server";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Database } from "@/types_db";
-import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
-import { revalidatePath } from "next/cache";
-import { cookies } from "next/headers";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ReactNode } from "react";
-import ManageSubscriptionButton from "./ManageSubscriptionButton";
-import { Calendar, Currency, ExternalLink, Info } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import Image from "next/image";
+import {
+  getUserDetails,
+  getSubscriptions,
+  getUser,
+} from "@/utils/supabase/queries";
+import { createClient } from "@/utils/supabase/server";
+import CustomerPortalForm from "@/components/ui/AccountForms/CustomerPortalForm";
+import EmailForm from "@/components/ui/AccountForms/EmailForm";
+import NameForm from "@/components/ui/AccountForms/NameForm";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import SignOutForm from "@/components/ui/AccountForms/SignOutForm";
 
 export default async function Account({
   params: { lng },
@@ -23,47 +29,16 @@ export default async function Account({
   params: { lng: any };
 }) {
   const { t } = await useTranslation(lng, "common");
-
-  const [session, userDetails, subscriptions] = await Promise.all([
-    getSession(),
-    getUserDetails(),
-    getSubscriptions(),
+  const supabase = createClient();
+  const [user, userDetails, subscription] = await Promise.all([
+    getUser(supabase),
+    getUserDetails(supabase),
+    getSubscriptions(supabase),
   ]);
 
-  const user = session?.user;
-
-  if (!session) {
+  if (!user) {
     return redirect("/signin");
   }
-
-  const updateName = async (formData: FormData) => {
-    "use server";
-
-    const newName = formData.get("name") as string;
-    const supabase = createServerActionClient<Database>({ cookies });
-    const session = await getSession();
-    const user = session?.user;
-    const { error } = await supabase
-      .from("users")
-      .update({ full_name: newName })
-      .eq("id", user?.id || "");
-    if (error) {
-      console.log(error);
-    }
-    revalidatePath("/me");
-  };
-
-  const updateEmail = async (formData: FormData) => {
-    "use server";
-
-    const newEmail = formData.get("email") as string;
-    const supabase = createServerActionClient<Database>({ cookies });
-    const { error } = await supabase.auth.updateUser({ email: newEmail });
-    if (error) {
-      console.log(error);
-    }
-    revalidatePath("/me");
-  };
 
   return (
     <section className="">
@@ -76,174 +51,38 @@ export default async function Account({
           )}
         </p>
       </div>
-      <div className="p-4">
-        <div className="m-auto w-full max-w-3xl mt-4 p-4 rounded-md border border-slate-200 dark:border-slate-700">
-          <h3 className="font-bold">{t("peyronnet-apps")}</h3>
-          <p className="text-slate-700 dark:text-slate-300 font-serif mb-2">
-            {t("peyronnet-apps-desc")}
-          </p>
-          <div className="flex">
-            <Link href="https://write.peyronnet.group/me">
-              <Button
-                variant="outline"
-                className="flex items-center space-x-2 px-2"
-              >
-                <Image
-                  alt="Synapsy Logo"
-                  width={24}
-                  height={24}
-                  src="/synapsy.png"
-                />
-                <span>Synapsy Write</span>
-                <ExternalLink height={12} />
-              </Button>
-            </Link>
-          </div>
-        </div>
-        <Card
-          title={t("products")}
-          description={
-            subscriptions && subscriptions.length > 0
-              ? t("products-available")
-              : t("no-products")
-          }
-          footer={<ManageSubscriptionButton lng={lng} session={session} />}
-        >
-          <div className="mt-8 mb-4">
-            {subscriptions && subscriptions.length > 0 ? (
-              <div className="space-y-2">
-                {subscriptions.map((subscription) => (
-                  <div
-                    key={subscription.id}
-                    className="rounded-md border p-4 dark:border-slate-700"
-                  >
-                    <h3 className="text-xl font-bold">
-                      {subscription?.prices?.products?.name}
-                    </h3>
-                    <div className="grid grid-cols-[auto,1fr] items-center gap-x-1">
-                      <Currency size={14} />
-                      <p>{`${new Intl.NumberFormat(
-                        lng === "fr" ? "fr-FR" : "en-US",
-                        {
-                          style: "currency",
-                          currency: subscription?.prices?.currency!,
-                          minimumFractionDigits: 0,
-                        }
-                      ).format(
-                        (subscription?.prices?.unit_amount || 0) / 100
-                      )}/${t(subscription?.prices?.interval ?? "month")}`}</p>
-                      <Info size={14} />
-                      <p>{t(subscription.status ?? "active")}</p>
-                      <Calendar size={14} />
-                      <p>
-                        {new Date(
-                          subscription.current_period_end
-                        ).toLocaleDateString(
-                          lng === "fr" ? "fr-FR" : "en-US"
-                        )}{" "}
-                        {new Date(
-                          subscription.current_period_end
-                        ).toLocaleTimeString(lng === "fr" ? "fr-FR" : "en-US")}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="p-4 rounded-md border dark:border-slate-700">
-                <Link href="/products">{t("products-desc")}</Link>
-              </div>
-            )}
-          </div>
-        </Card>
-        <Card
-          title={t("full-name")}
-          description={t("name-desc")}
-          footer={
-            <div className="flex flex-col items-start justify-between sm:flex-row sm:items-center">
-              <p className="pb-4 sm:pb-0">{t("name-char")}</p>
-              <Button type="submit" form="nameForm">
-                {t("update-name")}
-              </Button>
+
+      <div className="m-auto mt-4 w-full max-w-3xl gap-6 grid">
+        <Card>
+          <CardHeader>
+            <CardTitle>{t("peyronnet-apps")}</CardTitle>
+            <CardDescription>{t("peyronnet-apps-desc")}</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex">
+              <Link href="https://write.peyronnet.group/me">
+                <Button
+                  variant="outline"
+                  className="flex items-center space-x-2 px-2"
+                >
+                  <Image
+                    alt="Synapsy Logo"
+                    width={24}
+                    height={24}
+                    src="/synapsy.png"
+                  />
+                  <span>Synapsy Write</span>
+                  <ExternalLink height={12} />
+                </Button>
+              </Link>
             </div>
-          }
-        >
-          <div className="mt-8 mb-4 text-xl font-semibold">
-            <form id="nameForm" action={updateName}>
-              <Input
-                type="text"
-                name="name"
-                defaultValue={userDetails?.full_name ?? ""}
-                placeholder={t("full-name")}
-                maxLength={64}
-              />
-            </form>
-          </div>
+          </CardContent>
         </Card>
-        <Card
-          title={t("email")}
-          description={t("email-desc")}
-          footer={
-            <div className="flex flex-col items-start justify-between sm:flex-row sm:items-center">
-              <p className="pb-4 sm:pb-0">{t("email-notify")}</p>
-              <Button type="submit" form="emailForm" disabled={true}>
-                {t("update-email")}
-              </Button>
-            </div>
-          }
-        >
-          <div className="mt-8 mb-4 text-xl font-semibold">
-            <form id="emailForm" action={updateEmail}>
-              <Input
-                type="text"
-                name="email"
-                defaultValue={user ? user.email : ""}
-                placeholder={t("email")}
-                maxLength={64}
-              />
-            </form>
-          </div>
-        </Card>
-        <Card title={t("session")} description={t("sign-out")}>
-          <form action="/auth/signout" method="post">
-            <Button
-              variant="link"
-              className="button block text-red-500 dark:text-red-600"
-              type="submit"
-            >
-              {t("sign-out")}
-            </Button>
-          </form>
-        </Card>
+        <CustomerPortalForm lng={lng} subscriptions={subscription} />
+        <NameForm lng={lng} userName={userDetails?.full_name ?? ""} />
+        <EmailForm lng={lng} userEmail={user.email} />
+        <SignOutForm lng={lng} />
       </div>
     </section>
-  );
-}
-
-interface Props {
-  title: string;
-  description?: string;
-  footer?: ReactNode;
-  children: ReactNode;
-}
-
-function Card({ title, description, footer, children }: Props) {
-  return (
-    <div className="w-full max-w-3xl m-auto my-8 border rounded-md border-slate-200 dark:border-slate-700">
-      <div className="px-5 py-4">
-        <h3 className="mb-1 text-xl font-wide uppercase">{title}</h3>
-        <p className="text-slate-700 dark:text-slate-300 font-serif">
-          {description}
-        </p>
-        {children}
-      </div>
-      {footer ? (
-        <div className="p-4 border-t rounded-b-md border-slate-200 bg-slate-100 dark:border-slate-700 dark:bg-slate-900 text-slate-500">
-          {footer}
-        </div>
-      ) : (
-        <></>
-      )}
-    </div>
   );
 }
