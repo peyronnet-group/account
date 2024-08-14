@@ -14,7 +14,7 @@ import {
 import { useTranslation } from "@/app/i18n/client";
 export default function SignOutForm({ lng }: { lng: string }) {
   const { t } = useTranslation(lng, "common");
-  const router = getRedirectMethod() === "client" ? useRouter() : null;
+  const router = useRouter();
 
   return (
     <Card>
@@ -23,7 +23,15 @@ export default function SignOutForm({ lng }: { lng: string }) {
         <CardDescription>{t("sign-out")}</CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={(e) => handleRequest(e, SignOut, router)}>
+        <form
+          onSubmit={(e) =>
+            handleRequest(
+              e,
+              SignOut,
+              getRedirectMethod() === "client" ? router : null
+            )
+          }
+        >
           <input type="hidden" name="pathName" value={usePathname()} />
           <Button
             variant="link"

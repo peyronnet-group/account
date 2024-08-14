@@ -24,12 +24,12 @@ export default function SignUp({
   lng,
 }: SignUpProps) {
   const { t } = useTranslation(lng, "common");
-  const router = redirectMethod === "client" ? useRouter() : null;
+  const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setIsSubmitting(true); // Disable the button while the request is being handled
-    await handleRequest(e, signUp, router);
+    await handleRequest(e, signUp, redirectMethod === "client" ? router : null);
     setIsSubmitting(false);
   };
 
