@@ -17,6 +17,9 @@ import ForgotPassword from "@/components/ui/AuthForms/ForgotPassword";
 import UpdatePassword from "@/components/ui/AuthForms/UpdatePassword";
 import SignUp from "@/components/ui/AuthForms/Signup";
 import { useTranslation } from "@/app/i18n";
+import { WavyBackground } from "@/components/ui/wavy-background";
+import { AuroraBackground } from "@/components/ui/aurora-background";
+import { motion } from "framer-motion";
 
 export default async function SignIn({
   params,
@@ -63,9 +66,9 @@ export default async function SignIn({
           <div className="grid gap-2 text-center">
             <h1 className="text-3xl font-bold">
               {viewProp === "forgot_password"
-                ? "Reset Password"
+                ? t("reset-password")
                 : viewProp === "update_password"
-                ? "Update Password"
+                ? t("update-password")
                 : viewProp === "signup"
                 ? t("sign-up")
                 : t("sign-in")}
@@ -92,6 +95,7 @@ export default async function SignIn({
             )}
             {viewProp === "forgot_password" && (
               <ForgotPassword
+                lng={params.lng}
                 allowEmail={allowEmail}
                 redirectMethod={redirectMethod}
                 disableButton={searchParams.disable_button}
@@ -119,7 +123,9 @@ export default async function SignIn({
           {/*Signup*/}
         </div>
       </div>
-      <div className="hidden bg-muted lg:block"></div>
+      <div className="hidden lg:flex bg-slate-100 dark:bg-slate-800 justify-center items-center">
+        <Logo height={75} />
+      </div>
     </div>
   );
 }

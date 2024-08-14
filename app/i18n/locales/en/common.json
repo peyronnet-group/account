@@ -103,5 +103,7 @@
   "sign-in-magic": "Sign in via magic link",
   "third-party-providers": "Third-party sign-in",
   "email-sign-in": "Enter your email below to login to your account",
-  "sign-email-password": "Sign in with email and password"
+  "sign-email-password": "Sign in with email and password",
+  "reset-password": "Reset password",
+  "update-password": "Update password"
 }
