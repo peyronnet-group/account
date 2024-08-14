@@ -22,7 +22,7 @@
     "accept-language": "^3.0.20",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "framer-motion": "^11.3.24",
+    "framer-motion": "^11.3.27",
     "i18next": "^23.12.3",
     "i18next-browser-languagedetector": "^8.0.0",
     "i18next-resources-to-backend": "^1.2.1",
@@ -46,8 +46,8 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
     "postcss": "^8",
-    "supabase": "^1.188.4",
-    "tailwindcss": "^3.4.9",
+    "supabase": "^1.190.0",
+    "tailwindcss": "^3.4.10",
     "typescript": "^5"
   }
 }
