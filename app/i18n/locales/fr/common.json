@@ -105,5 +105,7 @@
   "email-sign-in": "Entrez votre email ci-dessous pour vous connecter à votre compte",
   "sign-email-password": "S'identifier avec un email et un mot de passe",
   "reset-password": "Réinitialiser le mot de passe",
-  "update-password": "Modifier le mot de passe"
+  "update-password": "Modifier le mot de passe",
+  "new-password": "Nouveau mot de passe",
+  "confirm-password": "Confirmez votre mot de passe"
 }

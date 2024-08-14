@@ -105,5 +105,7 @@
   "email-sign-in": "Enter your email below to login to your account",
   "sign-email-password": "Sign in with email and password",
   "reset-password": "Reset password",
-  "update-password": "Update password"
+  "update-password": "Update password",
+  "new-password": "New Password",
+  "confirm-password": "Confirm New Password"
 }

@@ -5,14 +5,19 @@ import { updatePassword } from "@/utils/auth-helpers/server";
 import { handleRequest } from "@/utils/auth-helpers/client";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { Input } from "../input";
+import { useTranslation } from "@/app/i18n/client";
 
 interface UpdatePasswordProps {
   redirectMethod: string;
+  lng: string;
 }
 
 export default function UpdatePassword({
   redirectMethod,
+  lng,
 }: UpdatePasswordProps) {
+  const { t } = useTranslation(lng, "common");
   const router = redirectMethod === "client" ? useRouter() : null;
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -31,27 +36,25 @@ export default function UpdatePassword({
       >
         <div className="grid gap-2">
           <div className="grid gap-1">
-            <label htmlFor="password">New Password</label>
-            <input
+            <label htmlFor="password">{t("new-password")}</label>
+            <Input
               id="password"
               placeholder="Password"
               type="password"
               name="password"
               autoComplete="current-password"
-              className="w-full p-3 rounded-md bg-zinc-800"
             />
-            <label htmlFor="passwordConfirm">Confirm New Password</label>
-            <input
+            <label htmlFor="passwordConfirm">{t("confirm-password")}</label>
+            <Input
               id="passwordConfirm"
               placeholder="Password"
               type="password"
               name="passwordConfirm"
               autoComplete="current-password"
-              className="w-full p-3 rounded-md bg-zinc-800"
             />
           </div>
           <Button type="submit" className="mt-1">
-            Update Password
+            {t("update-password")}
           </Button>
         </div>
       </form>

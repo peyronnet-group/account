@@ -102,7 +102,10 @@ export default async function SignIn({
               />
             )}
             {viewProp === "update_password" && (
-              <UpdatePassword redirectMethod={redirectMethod} />
+              <UpdatePassword
+                lng={params.lng}
+                redirectMethod={redirectMethod}
+              />
             )}
             {viewProp === "signup" && (
               <SignUp
@@ -120,7 +123,6 @@ export default async function SignIn({
                 </>
               )}
           </div>
-          {/*Signup*/}
         </div>
       </div>
       <div className="hidden lg:flex bg-slate-100 dark:bg-slate-800 justify-center items-center">
