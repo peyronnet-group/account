@@ -20,6 +20,7 @@ import { useTranslation } from "@/app/i18n";
 import { WavyBackground } from "@/components/ui/wavy-background";
 import { AuroraBackground } from "@/components/ui/aurora-background";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default async function SignIn({
   params,
@@ -108,11 +109,28 @@ export default async function SignIn({
               />
             )}
             {viewProp === "signup" && (
-              <SignUp
-                lng={params.lng}
-                allowEmail={allowEmail}
-                redirectMethod={redirectMethod}
-              />
+              <>
+                <SignUp
+                  lng={params.lng}
+                  allowEmail={allowEmail}
+                  redirectMethod={redirectMethod}
+                />
+                <OauthSignIn />
+                <Separator text={t("sign-in-link-text-2")} />
+
+                <p className="font-light text-sm text-center">
+                  <Link href="/signin/password_signin">
+                    {t("sign-email-password")}
+                  </Link>
+                </p>
+                {allowEmail && (
+                  <p className="font-light text-sm text-center">
+                    <Link href="/signin/email_signin">
+                      {t("sign-in-magic")}
+                    </Link>
+                  </p>
+                )}
+              </>
             )}
             {viewProp !== "update_password" &&
               viewProp !== "signup" &&

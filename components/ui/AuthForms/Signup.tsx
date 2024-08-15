@@ -34,10 +34,10 @@ export default function SignUp({
   };
 
   return (
-    <div className="my-8">
+    <div>
       <form
         noValidate={true}
-        className="mb-4"
+        className="mb-1"
         onSubmit={(e) => handleSubmit(e)}
       >
         <div className="grid gap-2">
@@ -66,16 +66,6 @@ export default function SignUp({
           </Button>
         </div>
       </form>
-      <Separator text={t("sign-in-link-text-2")} />
-
-      <p className="font-light text-sm text-center">
-        <Link href="/signin/password_signin">{t("sign-email-password")}</Link>
-      </p>
-      {allowEmail && (
-        <p className="font-light text-sm text-center">
-          <Link href="/signin/email_signin">{t("sign-in-magic")}</Link>
-        </p>
-      )}
     </div>
   );
 }
