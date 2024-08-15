@@ -55,7 +55,6 @@ export default function EmailSignIn({
               autoCapitalize="none"
               autoComplete="email"
               autoCorrect="off"
-              className="w-full p-3 rounded-md bg-zinc-800"
             />
           </div>
           <Button type="submit" className="mt-1" disabled={disableButton}>
