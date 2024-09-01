@@ -107,5 +107,10 @@
   "reset-password": "Reset password",
   "update-password": "Update password",
   "new-password": "New Password",
-  "confirm-password": "Confirm New Password"
+  "confirm-password": "Confirm New Password",
+  "blog-desc": "Articles and updates from the team",
+  "privacy-desc": "Learn more about our policies relative to your privacy",
+  "youtube-desc": "Watch our videos about our products",
+  "x-desc": "Follow us on X to get te latest updates",
+  "cgv-desc": "Find out more about our general terms and conditions of sale"
 }
