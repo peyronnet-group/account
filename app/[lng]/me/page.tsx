@@ -42,9 +42,9 @@ export default async function Account({
 
   return (
     <section className="">
-      <div className="p-5 bg-gradient-to-br from-blue-500 to-blue-600 text-white">
-        <h2 className="text-2xl uppercase font-wide">{t("my-account")}</h2>
-        <p className="font-serif ml-1">
+      <div className="bg-gradient-to-br from-blue-500 to-blue-600 p-5 text-white">
+        <h2 className="font-wide text-2xl uppercase">{t("my-account")}</h2>
+        <p className="ml-1 font-serif">
           {t("welcome-msg").replace(
             "{{user}}",
             userDetails?.full_name || "user",
@@ -52,7 +52,7 @@ export default async function Account({
         </p>
       </div>
 
-      <div className="m-auto mt-4 w-full max-w-3xl gap-6 grid">
+      <div className="m-auto mt-4 grid w-full max-w-3xl gap-6">
         <Card>
           <CardHeader>
             <CardTitle>{t("peyronnet-apps")}</CardTitle>

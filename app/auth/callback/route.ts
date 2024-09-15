@@ -1,7 +1,7 @@
+import { getErrorRedirect, getStatusRedirect } from "@/utils/helpers";
 import { createClient } from "@/utils/supabase/server";
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
-import { getErrorRedirect, getStatusRedirect } from "@/utils/helpers";
 
 export async function GET(request: NextRequest) {
   // The `/auth/callback` route is required for the server-side auth flow implemented
@@ -19,8 +19,8 @@ export async function GET(request: NextRequest) {
         getErrorRedirect(
           `https://account.peyronnet.group/signin`,
           error.name,
-          "Sorry, we weren't able to log you in. Please try again."
-        )
+          "Sorry, we weren't able to log you in. Please try again.",
+        ),
       );
     }
   }
@@ -30,7 +30,7 @@ export async function GET(request: NextRequest) {
     getStatusRedirect(
       `https://account.peyronnet.group/me`,
       "Success!",
-      "You are now signed in."
-    )
+      "You are now signed in.",
+    ),
   );
 }

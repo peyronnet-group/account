@@ -57,7 +57,7 @@ export default async function SignIn({
   }
 
   return (
-    <div className="w-full lg:grid lg:grid-cols-2 min-h-[calc(100vh-65px)]">
+    <div className="min-h-[calc(100vh-65px)] w-full lg:grid lg:grid-cols-2">
       <div className="flex items-center justify-center py-12">
         <div className="mx-auto grid w-[350px] gap-6">
           <div className="grid gap-2 text-center">
@@ -114,13 +114,13 @@ export default async function SignIn({
                 <OauthSignIn />
                 <Separator text={t("sign-in-link-text-2")} />
 
-                <p className="font-light text-sm text-center">
+                <p className="text-center text-sm font-light">
                   <Link href="/signin/password_signin">
                     {t("sign-email-password")}
                   </Link>
                 </p>
                 {allowEmail && (
-                  <p className="font-light text-sm text-center">
+                  <p className="text-center text-sm font-light">
                     <Link href="/signin/email_signin">
                       {t("sign-in-magic")}
                     </Link>
@@ -139,7 +139,7 @@ export default async function SignIn({
           </div>
         </div>
       </div>
-      <div className="hidden lg:flex bg-slate-100 dark:bg-slate-800 justify-center items-center">
+      <div className="hidden items-center justify-center bg-slate-100 dark:bg-slate-800 lg:flex">
         <Logo height={75} />
       </div>
     </div>
