@@ -1,20 +1,21 @@
 "use client";
-import { useTranslation } from "../i18n/client";
+
+import SiteFooter from "@/components/footer";
 import { Paragraph, Title } from "@/components/text";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import Logo from "@/components/logo";
 import { AuroraBackground } from "@/components/ui/aurora-background";
+import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import SiteFooter from "@/components/footer";
+import Link from "next/link";
+
+import { useTranslation } from "../i18n/client";
 
 export default function Home({ params: { lng } }: { params: { lng: any } }) {
   const { t } = useTranslation(lng, "common");
 
   return (
     <>
-      <main className="min-h-screen flex flex-col justify-center">
+      <main className="flex min-h-screen flex-col justify-center">
         <AuroraBackground>
           <motion.div
             initial={{ opacity: 0.0, y: 40 }}
@@ -24,18 +25,18 @@ export default function Home({ params: { lng } }: { params: { lng: any } }) {
               duration: 0.8,
               ease: "easeInOut",
             }}
-            className="relative flex flex-col gap-4 items-center justify-center px-4 dark:text-white"
+            className="relative flex flex-col items-center justify-center gap-4 px-4 dark:text-white"
           >
             <Title className="text-center">{t("home-headline")}</Title>
             <Paragraph className="text-center">{t("home-desc")}</Paragraph>
-            <span className="flex justify-center m-2">
+            <span className="m-2 flex justify-center">
               <Link href="/signin">
                 <Button>{t("sign-in")}</Button>
               </Link>
             </span>
 
-            <div className="flex sm:flex-row flex-col justify-center">
-              <div className="font-bold flex items-center space-x-2 p-2 m-2 border rounded-md backdrop-blur-md bg-white/40 dark:bg-slate-900/40 border-slate-200 dark:border-slate-700">
+            <div className="flex flex-col justify-center sm:flex-row">
+              <div className="m-2 flex items-center space-x-2 rounded-md border border-slate-200 bg-white/40 p-2 font-bold backdrop-blur-md dark:border-slate-700 dark:bg-slate-900/40">
                 <Image
                   src="/synapsy.png"
                   width={30}
@@ -44,7 +45,7 @@ export default function Home({ params: { lng } }: { params: { lng: any } }) {
                 />
                 <p>Synapsy AI</p>
               </div>
-              <div className="font-bold flex items-center space-x-2 p-2 m-2 border rounded-md backdrop-blur-md bg-white/40 dark:bg-slate-900/40 border-slate-200 dark:border-slate-700">
+              <div className="m-2 flex items-center space-x-2 rounded-md border border-slate-200 bg-white/40 p-2 font-bold backdrop-blur-md dark:border-slate-700 dark:bg-slate-900/40">
                 <Image
                   src="/Logo.svg"
                   width={30}
@@ -53,7 +54,7 @@ export default function Home({ params: { lng } }: { params: { lng: any } }) {
                 />
                 <p>Léo Corporation</p>
               </div>
-              <div className="font-bold flex items-center space-x-2 p-2 m-2 border rounded-md backdrop-blur-md bg-white/40 dark:bg-slate-900/40 border-slate-200 dark:border-slate-700">
+              <div className="m-2 flex items-center space-x-2 rounded-md border border-slate-200 bg-white/40 p-2 font-bold backdrop-blur-md dark:border-slate-700 dark:bg-slate-900/40">
                 <Image
                   src="/Devyus.png"
                   width={30}

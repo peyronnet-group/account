@@ -1,13 +1,14 @@
-import Stripe from "stripe";
 import { stripe } from "@/utils/stripe/config";
 import {
-  upsertProductRecord,
-  upsertPriceRecord,
-  manageSubscriptionStatusChange,
-  deleteProductRecord,
   deletePriceRecord,
+  deleteProductRecord,
   manageInvoicePaid,
+  manageSubscriptionStatusChange,
+  upsertPriceRecord,
+  upsertProductRecord,
 } from "@/utils/supabase/admin";
+import Stripe from "stripe";
+
 const relevantEvents = new Set([
   "product.created",
   "product.updated",
@@ -62,7 +63,7 @@ export async function POST(req: Request) {
           await manageSubscriptionStatusChange(
             subscription.id,
             subscription.customer as string,
-            event.type === "customer.subscription.created"
+            event.type === "customer.subscription.created",
           );
           break;
         case "checkout.session.completed":
@@ -72,7 +73,7 @@ export async function POST(req: Request) {
             await manageSubscriptionStatusChange(
               subscriptionId as string,
               checkoutSession.customer as string,
-              true
+              true,
             );
           }
           break;
@@ -91,7 +92,7 @@ export async function POST(req: Request) {
         `Webhook handler failed. View your Next.js function logs. ${error}`,
         {
           status: 400,
-        }
+        },
       );
     }
   }

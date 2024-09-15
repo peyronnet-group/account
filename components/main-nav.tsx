@@ -1,12 +1,6 @@
 "use client";
 
-import * as React from "react";
-import Link from "next/link";
-import { Menu } from "lucide-react";
-import Image from "next/image";
-
-import { NavItem } from "@/types/nav";
-import { cn } from "@/lib/utils";
+import { useTranslation } from "@/app/i18n/client";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -16,6 +10,12 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import { cn } from "@/lib/utils";
+import { NavItem } from "@/types/nav";
+import { Menu } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import * as React from "react";
 
 import Logo from "./logo";
 import { Button } from "./ui/button";
@@ -27,7 +27,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "./ui/sheet";
-import { useTranslation } from "@/app/i18n/client";
 
 interface MainNavProps {
   items?: NavItem[];
@@ -52,7 +51,7 @@ export function SheetMenu(props: { lng: string }) {
         <Link
           href={"/me"}
           className={cn(
-            "flex items-center px-2 text-lg font-semibold text-slate-200-foreground"
+            "flex items-center px-2 text-lg font-semibold text-slate-200-foreground",
           )}
         >
           {t("my-account")}
@@ -60,7 +59,7 @@ export function SheetMenu(props: { lng: string }) {
         <Link
           href={"/products"}
           className={cn(
-            "flex items-center px-2 text-lg font-semibold text-slate-200-foreground"
+            "flex items-center px-2 text-lg font-semibold text-slate-200-foreground",
           )}
         >
           {t("products")}
@@ -68,7 +67,7 @@ export function SheetMenu(props: { lng: string }) {
         <Link
           href={"https://leocorporation.dev"}
           className={cn(
-            "flex items-center px-2 text-lg font-semibold text-slate-200-foreground"
+            "flex items-center px-2 text-lg font-semibold text-slate-200-foreground",
           )}
         >
           Léo Corporation
@@ -76,7 +75,7 @@ export function SheetMenu(props: { lng: string }) {
         <Link
           href={"https://dev.peyronnet.group"}
           className={cn(
-            "flex items-center px-2 text-lg font-semibold text-slate-200-foreground"
+            "flex items-center px-2 text-lg font-semibold text-slate-200-foreground",
           )}
         >
           Devyus
@@ -227,7 +226,7 @@ const ListItem = React.forwardRef<
           ref={ref}
           className={cn(
             "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-            className
+            className,
           )}
           {...props}
         >

@@ -1,12 +1,14 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { useRouter, usePathname } from "next/navigation";
-import { useState } from "react";
-import { createStripePortal } from "@/utils/stripe/server";
-import Link from "next/link";
-import { Tables } from "@/types_db";
 import { useTranslation } from "@/app/i18n/client";
+import { Button } from "@/components/ui/button";
+import { Tables } from "@/types_db";
+import { createStripePortal } from "@/utils/stripe/server";
+import { Calendar, Currency, Info } from "lucide-react";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
+
 import {
   Card,
   CardContent,
@@ -15,7 +17,6 @@ import {
   CardHeader,
   CardTitle,
 } from "../card";
-import { Currency, Info, Calendar } from "lucide-react";
 
 type Subscription = Tables<"subscriptions">;
 type Price = Tables<"prices">;
@@ -77,21 +78,21 @@ export default function CustomerPortalForm({ subscriptions, lng }: Props) {
                         style: "currency",
                         currency: subscription?.prices?.currency!,
                         minimumFractionDigits: 0,
-                      }
+                      },
                     ).format(
-                      (subscription?.prices?.unit_amount || 0) / 100
+                      (subscription?.prices?.unit_amount || 0) / 100,
                     )}/${t(subscription?.prices?.interval ?? "month")}`}</p>
                     <Info size={14} />
                     <p>{t(subscription.status ?? "active")}</p>
                     <Calendar size={14} />
                     <p>
                       {new Date(
-                        subscription.current_period_end
+                        subscription.current_period_end,
                       ).toLocaleDateString(
-                        lng === "fr" ? "fr-FR" : "en-US"
+                        lng === "fr" ? "fr-FR" : "en-US",
                       )}{" "}
                       {new Date(
-                        subscription.current_period_end
+                        subscription.current_period_end,
                       ).toLocaleTimeString(lng === "fr" ? "fr-FR" : "en-US")}
                     </p>
                   </div>

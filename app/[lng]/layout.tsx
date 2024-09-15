@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import { SiteHeader } from "@/components/site-header";
+import { ThemeProvider } from "@/components/theme-provider";
 import { fontSans, fontSerif, fontWide } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
-import { ThemeProvider } from "@/components/theme-provider";
-import { SiteHeader } from "@/components/site-header";
+import type { Metadata } from "next";
+
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Account | Peyronnet Group",
@@ -25,16 +26,16 @@ export default function RootLayout({
     <html lang={lng}>
       <body
         className={cn(
-          "font-sans antialiased dark:bg-[#000014]",
+          "min-h-screen font-sans antialiased dark:bg-[#000014]",
           fontSans.variable,
           fontWide.variable,
-          fontSerif.variable
+          fontSerif.variable,
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="relative flex min-h-screen flex-col">
+          <div className="min-h-screen">
             <SiteHeader lng={lng} />
-            <div className="flex-1">{children}</div>
+            <div>{children}</div>
           </div>
         </ThemeProvider>
       </body>

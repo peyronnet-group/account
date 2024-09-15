@@ -1,12 +1,13 @@
 "use client";
 
+import { useTranslation } from "@/app/i18n/client";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { requestPasswordUpdate } from "@/utils/auth-helpers/server";
 import { handleRequest } from "@/utils/auth-helpers/client";
+import { requestPasswordUpdate } from "@/utils/auth-helpers/server";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useTranslation } from "@/app/i18n/client";
+
 import { Input } from "../input";
 
 // Define prop type with allowEmail boolean
@@ -32,7 +33,7 @@ export default function ForgotPassword({
     await handleRequest(
       e,
       requestPasswordUpdate,
-      redirectMethod === "client" ? router : null
+      redirectMethod === "client" ? router : null,
     );
     setIsSubmitting(false);
   };

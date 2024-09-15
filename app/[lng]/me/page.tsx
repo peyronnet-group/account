@@ -1,19 +1,9 @@
 import { useTranslation } from "@/app/i18n";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { redirect } from "next/navigation";
-import { ReactNode } from "react";
-import { ExternalLink } from "lucide-react";
-import Image from "next/image";
-import {
-  getUserDetails,
-  getSubscriptions,
-  getUser,
-} from "@/utils/supabase/queries";
-import { createClient } from "@/utils/supabase/server";
 import CustomerPortalForm from "@/components/ui/AccountForms/CustomerPortalForm";
 import EmailForm from "@/components/ui/AccountForms/EmailForm";
 import NameForm from "@/components/ui/AccountForms/NameForm";
+import SignOutForm from "@/components/ui/AccountForms/SignOutForm";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -21,7 +11,17 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import SignOutForm from "@/components/ui/AccountForms/SignOutForm";
+import {
+  getSubscriptions,
+  getUser,
+  getUserDetails,
+} from "@/utils/supabase/queries";
+import { createClient } from "@/utils/supabase/server";
+import { ExternalLink } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { redirect } from "next/navigation";
+import { ReactNode } from "react";
 
 export default async function Account({
   params: { lng },
@@ -42,17 +42,17 @@ export default async function Account({
 
   return (
     <section className="">
-      <div className="p-5 bg-gradient-to-br from-blue-500 to-blue-600 text-white">
-        <h2 className="text-2xl uppercase font-wide">{t("my-account")}</h2>
-        <p className="font-serif ml-1">
+      <div className="bg-gradient-to-br from-blue-500 to-blue-600 p-5 text-white">
+        <h2 className="font-wide text-2xl uppercase">{t("my-account")}</h2>
+        <p className="ml-1 font-serif">
           {t("welcome-msg").replace(
             "{{user}}",
-            userDetails?.full_name || "user"
+            userDetails?.full_name || "user",
           )}
         </p>
       </div>
 
-      <div className="m-auto mt-4 w-full max-w-3xl gap-6 grid">
+      <div className="m-auto mt-4 grid w-full max-w-3xl gap-6">
         <Card>
           <CardHeader>
             <CardTitle>{t("peyronnet-apps")}</CardTitle>

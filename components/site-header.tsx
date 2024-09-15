@@ -1,9 +1,8 @@
-import Link from "next/link";
-
-import { buttonVariants } from "@/components/ui/button";
 import { MainNav } from "@/components/main-nav";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { buttonVariants } from "@/components/ui/button";
 import { Github, Twitter } from "lucide-react";
+import Link from "next/link";
 
 export function SiteHeader(props: { lng: string }) {
   return (

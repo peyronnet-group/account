@@ -1,13 +1,14 @@
 "use client";
 
+import { useTranslation } from "@/app/i18n/client";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { signInWithPassword } from "@/utils/auth-helpers/server";
 import { handleRequest } from "@/utils/auth-helpers/client";
+import { signInWithPassword } from "@/utils/auth-helpers/server";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+
 import { Input } from "../input";
-import { useTranslation } from "@/app/i18n/client";
 
 // Define prop type with allowEmail boolean
 interface PasswordSignInProps {
@@ -30,7 +31,7 @@ export default function PasswordSignIn({
     await handleRequest(
       e,
       signInWithPassword,
-      redirectMethod === "client" ? router : null
+      redirectMethod === "client" ? router : null,
     );
     setIsSubmitting(false);
   };

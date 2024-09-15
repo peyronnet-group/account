@@ -1,26 +1,22 @@
+import { useTranslation } from "@/app/i18n";
 import Logo from "@/components/logo";
-import { createClient } from "@/utils/supabase/server";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import EmailSignIn from "@/components/ui/AuthForms/EmailSignIn";
+import ForgotPassword from "@/components/ui/AuthForms/ForgotPassword";
+import OauthSignIn from "@/components/ui/AuthForms/OauthSignIn";
+import PasswordSignIn from "@/components/ui/AuthForms/PasswordSignIn";
+import Separator from "@/components/ui/AuthForms/Separator";
+import SignUp from "@/components/ui/AuthForms/Signup";
+import UpdatePassword from "@/components/ui/AuthForms/UpdatePassword";
 import {
   getAuthTypes,
-  getViewTypes,
   getDefaultSignInView,
   getRedirectMethod,
+  getViewTypes,
 } from "@/utils/auth-helpers/settings";
-import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import PasswordSignIn from "@/components/ui/AuthForms/PasswordSignIn";
-import EmailSignIn from "@/components/ui/AuthForms/EmailSignIn";
-import Separator from "@/components/ui/AuthForms/Separator";
-import OauthSignIn from "@/components/ui/AuthForms/OauthSignIn";
-import ForgotPassword from "@/components/ui/AuthForms/ForgotPassword";
-import UpdatePassword from "@/components/ui/AuthForms/UpdatePassword";
-import SignUp from "@/components/ui/AuthForms/Signup";
-import { useTranslation } from "@/app/i18n";
-import { WavyBackground } from "@/components/ui/wavy-background";
-import { AuroraBackground } from "@/components/ui/aurora-background";
-import { motion } from "framer-motion";
+import { createClient } from "@/utils/supabase/server";
+import { cookies } from "next/headers";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default async function SignIn({
   params,
@@ -61,7 +57,7 @@ export default async function SignIn({
   }
 
   return (
-    <div className="w-full lg:grid lg:grid-cols-2">
+    <div className="min-h-[calc(100vh-65px)] w-full lg:grid lg:grid-cols-2">
       <div className="flex items-center justify-center py-12">
         <div className="mx-auto grid w-[350px] gap-6">
           <div className="grid gap-2 text-center">
@@ -69,10 +65,10 @@ export default async function SignIn({
               {viewProp === "forgot_password"
                 ? t("reset-password")
                 : viewProp === "update_password"
-                ? t("update-password")
-                : viewProp === "signup"
-                ? t("sign-up")
-                : t("sign-in")}
+                  ? t("update-password")
+                  : viewProp === "signup"
+                    ? t("sign-up")
+                    : t("sign-in")}
             </h1>
             <p className="text-slate-500 dark:text-slate-400">
               {t("email-sign-in")}
@@ -118,13 +114,13 @@ export default async function SignIn({
                 <OauthSignIn />
                 <Separator text={t("sign-in-link-text-2")} />
 
-                <p className="font-light text-sm text-center">
+                <p className="text-center text-sm font-light">
                   <Link href="/signin/password_signin">
                     {t("sign-email-password")}
                   </Link>
                 </p>
                 {allowEmail && (
-                  <p className="font-light text-sm text-center">
+                  <p className="text-center text-sm font-light">
                     <Link href="/signin/email_signin">
                       {t("sign-in-magic")}
                     </Link>
@@ -143,7 +139,7 @@ export default async function SignIn({
           </div>
         </div>
       </div>
-      <div className="hidden lg:flex bg-slate-100 dark:bg-slate-800 justify-center items-center">
+      <div className="hidden items-center justify-center bg-slate-100 dark:bg-slate-800 lg:flex">
         <Logo height={75} />
       </div>
     </div>

@@ -1,11 +1,10 @@
+import SiteFooter from "@/components/footer";
 import Pricing from "@/components/pricing";
 import {
   getProducts,
   getSubscriptions,
   getUser,
 } from "@/utils/supabase/queries";
-
-import SiteFooter from "@/components/footer";
 import { createClient } from "@/utils/supabase/server";
 
 export default async function PricingPage({
