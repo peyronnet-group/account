@@ -61,7 +61,7 @@ export default async function SignIn({
   }
 
   return (
-    <div className="w-full lg:grid lg:grid-cols-2">
+    <div className="w-full lg:grid lg:grid-cols-2 min-h-[calc(100vh-65px)]">
       <div className="flex items-center justify-center py-12">
         <div className="mx-auto grid w-[350px] gap-6">
           <div className="grid gap-2 text-center">

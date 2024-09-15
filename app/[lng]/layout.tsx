@@ -25,16 +25,16 @@ export default function RootLayout({
     <html lang={lng}>
       <body
         className={cn(
-          "font-sans antialiased dark:bg-[#000014]",
+          "font-sans antialiased dark:bg-[#000014] min-h-screen",
           fontSans.variable,
           fontWide.variable,
           fontSerif.variable
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="relative flex min-h-screen flex-col">
+          <div className="min-h-screen">
             <SiteHeader lng={lng} />
-            <div className="flex-1">{children}</div>
+            <div>{children}</div>
           </div>
         </ThemeProvider>
       </body>
