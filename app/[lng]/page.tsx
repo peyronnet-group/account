@@ -1,13 +1,14 @@
 "use client";
-import { useTranslation } from "../i18n/client";
+
+import SiteFooter from "@/components/footer";
 import { Paragraph, Title } from "@/components/text";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import Logo from "@/components/logo";
 import { AuroraBackground } from "@/components/ui/aurora-background";
+import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import SiteFooter from "@/components/footer";
+import Link from "next/link";
+
+import { useTranslation } from "../i18n/client";
 
 export default function Home({ params: { lng } }: { params: { lng: any } }) {
   const { t } = useTranslation(lng, "common");

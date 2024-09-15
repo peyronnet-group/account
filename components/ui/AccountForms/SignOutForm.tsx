@@ -1,17 +1,20 @@
 "use client";
-import { SignOut } from "@/utils/auth-helpers/server";
+
+import { useTranslation } from "@/app/i18n/client";
 import { handleRequest } from "@/utils/auth-helpers/client";
-import { usePathname, useRouter } from "next/navigation";
+import { SignOut } from "@/utils/auth-helpers/server";
 import { getRedirectMethod } from "@/utils/auth-helpers/settings";
+import { usePathname, useRouter } from "next/navigation";
+
 import { Button } from "../button";
 import {
   Card,
+  CardContent,
+  CardDescription,
   CardHeader,
   CardTitle,
-  CardDescription,
-  CardContent,
 } from "../card";
-import { useTranslation } from "@/app/i18n/client";
+
 export default function SignOutForm({ lng }: { lng: string }) {
   const { t } = useTranslation(lng, "common");
   const router = useRouter();
@@ -28,7 +31,7 @@ export default function SignOutForm({ lng }: { lng: string }) {
             handleRequest(
               e,
               SignOut,
-              getRedirectMethod() === "client" ? router : null
+              getRedirectMethod() === "client" ? router : null,
             )
           }
         >

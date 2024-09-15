@@ -1,15 +1,18 @@
 "use client";
 
+import { useTranslation } from "@/app/i18n/client";
+import { cn } from "@/lib/utils";
 import { Tables } from "@/types_db";
 import { getErrorRedirect } from "@/utils/helpers";
 import { getStripe } from "@/utils/stripe/client";
+import { checkoutWithStripe } from "@/utils/stripe/server";
 import { User } from "@supabase/supabase-js";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
-import { Button } from "./ui/button";
-import { cn } from "@/lib/utils";
-import { useTranslation } from "@/app/i18n/client";
+
 import PricingFeatures from "./features";
+import { Button } from "./ui/button";
 import {
   Select,
   SelectContent,
@@ -17,8 +20,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import { checkoutWithStripe } from "@/utils/stripe/server";
-import Image from "next/image";
 
 type Subscription = Tables<"subscriptions">;
 type Product = Tables<"products">;
@@ -48,9 +49,9 @@ export default function Pricing({ user, products, subscriptions, lng }: Props) {
   const intervals = Array.from(
     new Set(
       products.flatMap((product) =>
-        product?.prices?.map((price) => price?.interval)
-      )
-    )
+        product?.prices?.map((price) => price?.interval),
+      ),
+    ),
   );
   const router = useRouter();
   const [billingInterval, setBillingInterval] =
@@ -122,7 +123,7 @@ export default function Pricing({ user, products, subscriptions, lng }: Props) {
       const { errorRedirect, sessionId } = await checkoutWithStripe(
         price,
         currentPath,
-        trial
+        trial,
       );
 
       if (errorRedirect) {
@@ -135,8 +136,8 @@ export default function Pricing({ user, products, subscriptions, lng }: Props) {
           getErrorRedirect(
             currentPath,
             "An unknown error occurred.",
-            "Please try again later or contact a system administrator."
-          )
+            "Please try again later or contact a system administrator.",
+          ),
         );
       }
       const stripe = await getStripe();
@@ -240,7 +241,7 @@ export default function Pricing({ user, products, subscriptions, lng }: Props) {
             const price = product?.prices?.find(
               (price) =>
                 price.interval === billingInterval &&
-                price.currency === selectedCurrency
+                price.currency === selectedCurrency,
             );
             if (!price) return null;
             const priceString = new Intl.NumberFormat(
@@ -249,7 +250,7 @@ export default function Pricing({ user, products, subscriptions, lng }: Props) {
                 style: "currency",
                 currency: price.currency!,
                 minimumFractionDigits: 2,
-              }
+              },
             ).format((price?.unit_amount || 0) / 100);
             return (
               <div
@@ -260,7 +261,7 @@ export default function Pricing({ user, products, subscriptions, lng }: Props) {
                     "border border-blue-500": subscriptions
                       ? isSubscribedToProduct(product.id)
                       : product.name === "Freelancer",
-                  }
+                  },
                 )}
               >
                 <div className="p-6">

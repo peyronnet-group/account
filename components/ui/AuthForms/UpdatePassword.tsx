@@ -1,12 +1,13 @@
 "use client";
 
+import { useTranslation } from "@/app/i18n/client";
 import { Button } from "@/components/ui/button";
-import { updatePassword } from "@/utils/auth-helpers/server";
 import { handleRequest } from "@/utils/auth-helpers/client";
+import { updatePassword } from "@/utils/auth-helpers/server";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+
 import { Input } from "../input";
-import { useTranslation } from "@/app/i18n/client";
 
 interface UpdatePasswordProps {
   redirectMethod: string;
@@ -26,7 +27,7 @@ export default function UpdatePassword({
     await handleRequest(
       e,
       updatePassword,
-      redirectMethod === "client" ? router : null
+      redirectMethod === "client" ? router : null,
     );
     setIsSubmitting(false);
   };

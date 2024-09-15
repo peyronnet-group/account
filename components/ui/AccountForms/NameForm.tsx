@@ -1,10 +1,12 @@
 "use client";
 
+import { useTranslation } from "@/app/i18n/client";
 import { Button } from "@/components/ui/button";
-import { updateName } from "@/utils/auth-helpers/server";
 import { handleRequest } from "@/utils/auth-helpers/client";
+import { updateName } from "@/utils/auth-helpers/server";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+
 import {
   Card,
   CardContent,
@@ -13,7 +15,6 @@ import {
   CardHeader,
   CardTitle,
 } from "../card";
-import { useTranslation } from "@/app/i18n/client";
 import { Input } from "../input";
 
 export default function NameForm({

@@ -1,8 +1,9 @@
 "use client";
+
+import { useTranslation } from "@/app/i18n/client";
 import Link from "next/link";
 
 import Logo from "./logo";
-import { useTranslation } from "@/app/i18n/client";
 
 export default function SiteFooter({ lng }: { lng: string }) {
   const { t } = useTranslation(lng, "common");

@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import { SiteHeader } from "@/components/site-header";
+import { ThemeProvider } from "@/components/theme-provider";
 import { fontSans, fontSerif, fontWide } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
-import { ThemeProvider } from "@/components/theme-provider";
-import { SiteHeader } from "@/components/site-header";
+import type { Metadata } from "next";
+
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Account | Peyronnet Group",
@@ -28,7 +29,7 @@ export default function RootLayout({
           "font-sans antialiased dark:bg-[#000014] min-h-screen",
           fontSans.variable,
           fontWide.variable,
-          fontSerif.variable
+          fontSerif.variable,
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
