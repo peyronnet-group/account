@@ -34,7 +34,7 @@
     "react-dom": "^18",
     "react-i18next": "^15.1.0",
     "simplex-noise": "^4.0.3",
-    "stripe": "^17.2.0",
+    "stripe": "^17.2.1",
     "tailwind-merge": "^2.5.3",
     "tailwindcss-animate": "^1.0.7"
   },
