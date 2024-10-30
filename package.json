@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -27,7 +27,7 @@
     "i18next-browser-languagedetector": "^8.0.0",
     "i18next-resources-to-backend": "^1.2.1",
     "lucide-react": "^0.454.0",
-    "next": "14.2.15",
+    "next": "15.0.2",
     "next-themes": "^0.3.0",
     "react": "^18",
     "react-cookie": "^7.2.2",
@@ -45,7 +45,7 @@
     "@types/react-dom": "^18",
     "autoprefixer": "^10.4.20",
     "eslint": "^8",
-    "eslint-config-next": "14.2.15",
+    "eslint-config-next": "15.0.2",
     "postcss": "^8",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.8",

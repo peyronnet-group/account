@@ -11,6 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { DefaultLanguageParams } from "@/lib/languages";
 import {
   getSubscriptions,
   getUser,
@@ -21,15 +22,16 @@ import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { ReactNode } from "react";
 
 export default async function Account({
-  params: { lng },
+  params,
 }: {
-  params: { lng: any };
+  params: DefaultLanguageParams;
 }) {
+  const { lng } = await params;
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { t } = await useTranslation(lng, "common");
-  const supabase = createClient();
+  const supabase = await createClient();
   const [user, userDetails, subscription] = await Promise.all([
     getUser(supabase),
     getUserDetails(supabase),
