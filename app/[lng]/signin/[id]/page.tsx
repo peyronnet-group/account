@@ -7,6 +7,7 @@ import PasswordSignIn from "@/components/ui/AuthForms/PasswordSignIn";
 import Separator from "@/components/ui/AuthForms/Separator";
 import SignUp from "@/components/ui/AuthForms/Signup";
 import UpdatePassword from "@/components/ui/AuthForms/UpdatePassword";
+import { Language } from "@/lib/languages";
 import {
   getAuthTypes,
   getDefaultSignInView,
@@ -22,10 +23,13 @@ export default async function SignIn({
   params,
   searchParams,
 }: {
-  params: { id: string; lng: string };
-  searchParams: { disable_button: boolean };
+  params: Promise<{ id: string; lng: Language }>;
+  searchParams: Promise<{ disable_button: boolean }>;
 }) {
-  const { t } = await useTranslation(params.lng, "common");
+  const { id, lng } = await params;
+  const searchPa = await searchParams;
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { t } = await useTranslation(lng, "common");
   const { allowOauth, allowEmail, allowPassword } = getAuthTypes();
   const viewTypes = getViewTypes();
   const redirectMethod = getRedirectMethod();
@@ -34,17 +38,17 @@ export default async function SignIn({
   let viewProp: string;
 
   // Assign url id to 'viewProp' if it's a valid string and ViewTypes includes it
-  if (typeof params.id === "string" && viewTypes.includes(params.id)) {
-    viewProp = params.id;
+  if (typeof id === "string" && viewTypes.includes(id)) {
+    viewProp = id;
   } else {
     const preferredSignInView =
-      cookies().get("preferredSignInView")?.value || null;
+      (await cookies()).get("preferredSignInView")?.value || null;
     viewProp = getDefaultSignInView(preferredSignInView);
     return redirect(`/signin/${viewProp}`);
   }
 
   // Check if the user is already logged in and redirect to the account page if so
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const {
     data: { user },
@@ -77,37 +81,34 @@ export default async function SignIn({
           <div className="grid gap-2">
             {viewProp === "password_signin" && (
               <PasswordSignIn
-                lng={params.lng}
+                lng={lng}
                 allowEmail={allowEmail}
                 redirectMethod={redirectMethod}
               />
             )}
             {viewProp === "email_signin" && (
               <EmailSignIn
-                lng={params.lng}
+                lng={lng}
                 allowPassword={allowPassword}
                 redirectMethod={redirectMethod}
-                disableButton={searchParams.disable_button}
+                disableButton={searchPa.disable_button}
               />
             )}
             {viewProp === "forgot_password" && (
               <ForgotPassword
-                lng={params.lng}
+                lng={lng}
                 allowEmail={allowEmail}
                 redirectMethod={redirectMethod}
-                disableButton={searchParams.disable_button}
+                disableButton={searchPa.disable_button}
               />
             )}
             {viewProp === "update_password" && (
-              <UpdatePassword
-                lng={params.lng}
-                redirectMethod={redirectMethod}
-              />
+              <UpdatePassword lng={lng} redirectMethod={redirectMethod} />
             )}
             {viewProp === "signup" && (
               <>
                 <SignUp
-                  lng={params.lng}
+                  lng={lng}
                   allowEmail={allowEmail}
                   redirectMethod={redirectMethod}
                 />

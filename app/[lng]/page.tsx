@@ -4,13 +4,16 @@ import SiteFooter from "@/components/footer";
 import { Paragraph, Title } from "@/components/text";
 import { AuroraBackground } from "@/components/ui/aurora-background";
 import { Button } from "@/components/ui/button";
+import { DefaultLanguageParams } from "@/lib/languages";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { use } from "react";
 
 import { useTranslation } from "../i18n/client";
 
-export default function Home({ params: { lng } }: { params: { lng: any } }) {
+export default function Home({ params }: { params: DefaultLanguageParams }) {
+  const { lng } = use(params);
   const { t } = useTranslation(lng, "common");
 
   return (

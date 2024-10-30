@@ -1,5 +1,6 @@
 import SiteFooter from "@/components/footer";
 import Pricing from "@/components/pricing";
+import { DefaultLanguageParams } from "@/lib/languages";
 import {
   getProducts,
   getSubscriptions,
@@ -8,11 +9,12 @@ import {
 import { createClient } from "@/utils/supabase/server";
 
 export default async function PricingPage({
-  params: { lng },
+  params,
 }: {
-  params: { lng: any };
+  params: DefaultLanguageParams;
 }) {
-  const supabase = createClient();
+  const { lng } = await params;
+  const supabase = await createClient();
   const [user, products, subscriptions] = await Promise.all([
     getUser(supabase),
     getProducts(supabase),
