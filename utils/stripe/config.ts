@@ -11,7 +11,7 @@ export const stripe = new Stripe(
     // https://stripe.com/docs/building-plugins#setappinfo
     appInfo: {
       name: "Peyronnet Account",
-      version: "2.1.1",
+      version: "2.1.2",
       url: "https://github.com/peyronnet-group/account",
     },
   },
