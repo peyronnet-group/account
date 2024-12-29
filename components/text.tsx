@@ -31,10 +31,7 @@ export function Paragraph({ children, className }: any) {
   return (
     <p
       ref={ref}
-      className={cn(
-        "font-serif text-lg text-muted-foreground sm:text-xl",
-        className,
-      )}
+      className={cn("text-muted-foreground text-lg sm:text-xl", className)}
       style={{
         opacity: isInView ? 1 : 0,
         transition: "all 2s cubic-bezier(0.17, 0.55, 0.55, 1) 1s",
