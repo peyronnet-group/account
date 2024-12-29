@@ -2,7 +2,7 @@ import {
   JetBrains_Mono as FontMono,
   Manrope as FontSans,
   Lora as FontSerif,
-  Lexend_Zetta as FontWide,
+  Lexend_Giga as FontWide,
 } from "next/font/google";
 
 export const fontSans = FontSans({
