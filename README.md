@@ -1,4 +1,4 @@
-# Peyronnet Account System
+# GRP Account System
 
 A user management and subscription-based application built with **React**, **Next.js**, and **TypeScript**. The project uses **Supabase** for authentication and database management and integrates **Stripe** to manage subscriptions and payments. Based on [Next.js Subscription Payments Starter](https://github.com/vercel/nextjs-subscription-payments).
 
