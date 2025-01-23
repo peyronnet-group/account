@@ -100,7 +100,7 @@ export default function CustomerPortalForm({ subscriptions, lng }: Props) {
               ))}
             </div>
           ) : (
-            <div className="p-4 rounded-md border dark:border-slate-700">
+            <div className="rounded-md border p-4 dark:border-slate-700">
               <Link href="/products">{t("products-desc")}</Link>
             </div>
           )}

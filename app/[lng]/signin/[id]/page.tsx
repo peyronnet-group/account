@@ -140,7 +140,7 @@ export default async function SignIn({
           </div>
         </div>
       </div>
-      <div className="hidden items-center justify-center bg-slate-100 dark:bg-slate-800 lg:flex">
+      <div className="hidden items-center justify-center bg-slate-100 lg:flex dark:bg-slate-800">
         <Logo height={75} />
       </div>
     </div>

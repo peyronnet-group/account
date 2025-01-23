@@ -11,7 +11,7 @@ export function Title({ children, className }: any) {
     <h1
       ref={ref}
       className={cn(
-        "font-wide text-3xl uppercase leading-tight tracking-tighter sm:text-3xl md:text-5xl lg:text-6xl",
+        "font-wide text-3xl leading-tight tracking-tighter uppercase sm:text-3xl md:text-5xl lg:text-6xl",
         className,
       )}
       style={{
