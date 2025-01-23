@@ -44,7 +44,7 @@ export default async function Account({
 
   return (
     <section className="">
-      <div className="bg-gradient-to-br from-blue-500 to-blue-600 p-5 text-white">
+      <div className="bg-linear-to-br from-blue-500 to-blue-600 p-5 text-white">
         <h2 className="font-wide text-2xl uppercase">{t("my-account")}</h2>
         <p className="ml-1 font-serif">
           {t("welcome-msg").replace(

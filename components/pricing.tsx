@@ -179,9 +179,9 @@ export default function Pricing({ user, products, subscriptions, lng }: Props) {
                 type="button"
                 className={`${
                   billingInterval === "month"
-                    ? "relative w-1/2 border-slate-200 bg-slate-100 shadow-sm dark:border-slate-800 dark:bg-slate-700 dark:text-white"
+                    ? "relative w-1/2 border-slate-200 bg-slate-100 shadow-xs dark:border-slate-800 dark:bg-slate-700 dark:text-white"
                     : "relative ml-0.5 w-1/2 border border-transparent text-slate-400"
-                } m-1 whitespace-nowrap rounded-md py-2 text-sm font-medium focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 sm:w-auto sm:px-8`}
+                } m-1 whitespace-nowrap rounded-md py-2 text-sm font-medium focus:z-10 focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 sm:w-auto sm:px-8`}
               >
                 {t("monthly-billing")}
               </button>
@@ -192,9 +192,9 @@ export default function Pricing({ user, products, subscriptions, lng }: Props) {
                 type="button"
                 className={`${
                   billingInterval === "year"
-                    ? "relative w-1/2 border-slate-200 bg-slate-100 shadow-sm dark:border-slate-800 dark:bg-slate-700 dark:text-white"
+                    ? "relative w-1/2 border-slate-200 bg-slate-100 shadow-xs dark:border-slate-800 dark:bg-slate-700 dark:text-white"
                     : "relative ml-0.5 w-1/2 border border-transparent text-slate-400"
-                } m-1 whitespace-nowrap rounded-md py-2 text-sm font-medium focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 sm:w-auto sm:px-8`}
+                } m-1 whitespace-nowrap rounded-md py-2 text-sm font-medium focus:z-10 focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 sm:w-auto sm:px-8`}
               >
                 {t("yearly-billing")}
               </button>
@@ -259,7 +259,7 @@ export default function Pricing({ user, products, subscriptions, lng }: Props) {
               <div
                 key={product.id}
                 className={cn(
-                  "divide-y divide-slate-100 rounded-lg border border-slate-300 bg-white shadow-sm dark:divide-slate-600 dark:border-slate-700 dark:bg-slate-900",
+                  "divide-y divide-slate-100 rounded-lg border border-slate-300 bg-white shadow-xs dark:divide-slate-600 dark:border-slate-700 dark:bg-slate-900",
                   {
                     "border border-blue-500": subscriptions
                       ? isSubscribedToProduct(product.id)

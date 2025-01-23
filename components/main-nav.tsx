@@ -125,7 +125,7 @@ export function NavMenu(props: { lng: string }) {
                 <li className="row-span-3">
                   <NavigationMenuLink asChild>
                     <a
-                      className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b dark:from-slate-800 dark:to-slate-900 from-slate-200/50 to-slate-200 p-6 no-underline outline-none focus:shadow-md"
+                      className="flex h-full w-full select-none flex-col justify-end rounded-md bg-linear-to-b dark:from-slate-800 dark:to-slate-900 from-slate-200/50 to-slate-200 p-6 no-underline outline-hidden focus:shadow-md"
                       href="https://leocorporation.dev"
                     >
                       <Image
@@ -170,7 +170,7 @@ export function NavMenu(props: { lng: string }) {
                 <li className="row-span-3">
                   <NavigationMenuLink asChild>
                     <a
-                      className="flex h-full w-full select-none flex-col justify-end rounded-md dark:from-slate-800 dark:to-slate-900 bg-gradient-to-b from-slate-200/50 to-slate-200 p-6 no-underline outline-none focus:shadow-md"
+                      className="flex h-full w-full select-none flex-col justify-end rounded-md dark:from-slate-800 dark:to-slate-900 bg-linear-to-b from-slate-200/50 to-slate-200 p-6 no-underline outline-hidden focus:shadow-md"
                       href="https://dev.peyronnet.group"
                     >
                       <Image
@@ -225,7 +225,7 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-hidden transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
             className,
           )}
           {...props}
