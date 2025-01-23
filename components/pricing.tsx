@@ -152,7 +152,7 @@ export default function Pricing({ user, products, subscriptions, lng }: Props) {
   if (!products.length)
     return (
       <section className="flex min-h-screen flex-col items-center justify-center">
-        <h2 className="text-center font-wide uppercase">
+        <h2 className="font-wide text-center uppercase">
           No plans are available right now.
         </h2>
         <p className="text-center">
@@ -172,16 +172,16 @@ export default function Pricing({ user, products, subscriptions, lng }: Props) {
             {t("available-products-desc")}
           </Paragraph>
 
-          <div className="relative mt-6 flex self-center rounded-lg border p-0.5 dark:border-slate-800 dark:bg-slate-900 sm:mt-8">
+          <div className="relative mt-6 flex self-center rounded-lg border p-0.5 sm:mt-8 dark:border-slate-800 dark:bg-slate-900">
             {intervals.includes("month") && (
               <button
                 onClick={() => setBillingInterval("month")}
                 type="button"
                 className={`${
                   billingInterval === "month"
-                    ? "relative w-1/2 border-slate-200 bg-slate-100 shadow-sm dark:border-slate-800 dark:bg-slate-700 dark:text-white"
+                    ? "relative w-1/2 border-slate-200 bg-slate-100 shadow-xs dark:border-slate-800 dark:bg-slate-700 dark:text-white"
                     : "relative ml-0.5 w-1/2 border border-transparent text-slate-400"
-                } m-1 whitespace-nowrap rounded-md py-2 text-sm font-medium focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 sm:w-auto sm:px-8`}
+                } focus:ring-opacity-50 m-1 rounded-md py-2 text-sm font-medium whitespace-nowrap focus:z-10 focus:ring-2 focus:ring-blue-500 focus:outline-hidden sm:w-auto sm:px-8`}
               >
                 {t("monthly-billing")}
               </button>
@@ -192,9 +192,9 @@ export default function Pricing({ user, products, subscriptions, lng }: Props) {
                 type="button"
                 className={`${
                   billingInterval === "year"
-                    ? "relative w-1/2 border-slate-200 bg-slate-100 shadow-sm dark:border-slate-800 dark:bg-slate-700 dark:text-white"
+                    ? "relative w-1/2 border-slate-200 bg-slate-100 shadow-xs dark:border-slate-800 dark:bg-slate-700 dark:text-white"
                     : "relative ml-0.5 w-1/2 border border-transparent text-slate-400"
-                } m-1 whitespace-nowrap rounded-md py-2 text-sm font-medium focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 sm:w-auto sm:px-8`}
+                } focus:ring-opacity-50 m-1 rounded-md py-2 text-sm font-medium whitespace-nowrap focus:z-10 focus:ring-2 focus:ring-blue-500 focus:outline-hidden sm:w-auto sm:px-8`}
               >
                 {t("yearly-billing")}
               </button>
@@ -259,7 +259,7 @@ export default function Pricing({ user, products, subscriptions, lng }: Props) {
               <div
                 key={product.id}
                 className={cn(
-                  "divide-y divide-slate-100 rounded-lg border border-slate-300 bg-white shadow-sm dark:divide-slate-600 dark:border-slate-700 dark:bg-slate-900",
+                  "divide-y divide-slate-100 rounded-lg border border-slate-300 bg-white shadow-xs dark:divide-slate-600 dark:border-slate-700 dark:bg-slate-900",
                   {
                     "border border-blue-500": subscriptions
                       ? isSubscribedToProduct(product.id)
@@ -269,11 +269,11 @@ export default function Pricing({ user, products, subscriptions, lng }: Props) {
               >
                 <div className="p-6">
                   <span className="flex items-center space-x-2">
-                    <h2 className="text-xl font-semibold leading-6 dark:text-white">
+                    <h2 className="text-xl leading-6 font-semibold dark:text-white">
                       {product.name}
                     </h2>
                     {subscriptions?.length === 0 ? (
-                      <p className="text-nowrap rounded-full bg-blue-500 px-2 text-sm text-white">
+                      <p className="rounded-full bg-blue-500 px-2 text-sm text-nowrap text-white">
                         {t("free-trial")}
                       </p>
                     ) : (
@@ -315,7 +315,7 @@ export default function Pricing({ user, products, subscriptions, lng }: Props) {
 function LogoCloud() {
   return (
     <div>
-      <p className="mt-24 text-center font-wide text-xs uppercase text-slate-400">
+      <p className="font-wide mt-24 text-center text-xs text-slate-400 uppercase">
         Brought to you by
       </p>
       <div className="my-12 flex flex-col items-center space-y-4 sm:mt-8 sm:grid sm:grid-cols-5 sm:gap-6 sm:space-y-0 md:mx-auto md:max-w-2xl">

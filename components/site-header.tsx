@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export function SiteHeader(props: { lng: string }) {
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-800/50 backdrop-blur-md">
+    <header className="sticky top-0 z-40 w-full border-b border-slate-200 bg-white/50 backdrop-blur-md dark:border-slate-800 dark:bg-slate-800/50">
       <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
         <MainNav lng={props.lng} items={[{ title: "Home", href: "/" }]} />
         <div className="flex flex-1 items-center justify-end space-x-4">
