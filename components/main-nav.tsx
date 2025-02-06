@@ -51,7 +51,7 @@ export function SheetMenu(props: { lng: string }) {
         <Link
           href={"/me"}
           className={cn(
-            "flex items-center px-2 text-lg font-semibold text-slate-200-foreground",
+            "text-slate-200-foreground flex items-center px-2 text-lg font-semibold",
           )}
         >
           {t("my-account")}
@@ -59,7 +59,7 @@ export function SheetMenu(props: { lng: string }) {
         <Link
           href={"/products"}
           className={cn(
-            "flex items-center px-2 text-lg font-semibold text-slate-200-foreground",
+            "text-slate-200-foreground flex items-center px-2 text-lg font-semibold",
           )}
         >
           {t("products")}
@@ -67,7 +67,7 @@ export function SheetMenu(props: { lng: string }) {
         <Link
           href={"https://leocorporation.dev"}
           className={cn(
-            "flex items-center px-2 text-lg font-semibold text-slate-200-foreground",
+            "text-slate-200-foreground flex items-center px-2 text-lg font-semibold",
           )}
         >
           Léo Corporation
@@ -75,7 +75,7 @@ export function SheetMenu(props: { lng: string }) {
         <Link
           href={"https://dev.peyronnet.group"}
           className={cn(
-            "flex items-center px-2 text-lg font-semibold text-slate-200-foreground",
+            "text-slate-200-foreground flex items-center px-2 text-lg font-semibold",
           )}
         >
           Devyus
@@ -125,7 +125,7 @@ export function NavMenu(props: { lng: string }) {
                 <li className="row-span-3">
                   <NavigationMenuLink asChild>
                     <a
-                      className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b dark:from-slate-800 dark:to-slate-900 from-slate-200/50 to-slate-200 p-6 no-underline outline-none focus:shadow-md"
+                      className="flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b from-slate-200/50 to-slate-200 p-6 no-underline outline-hidden select-none focus:shadow-md dark:from-slate-800 dark:to-slate-900"
                       href="https://leocorporation.dev"
                     >
                       <Image
@@ -134,10 +134,10 @@ export function NavMenu(props: { lng: string }) {
                         src={"/Logo.svg"}
                         alt={"The logo of Léo Corporation."}
                       />
-                      <div className="mb-2 mt-4 text-lg font-medium">
+                      <div className="mt-4 mb-2 text-lg font-medium">
                         Léo Corporation
                       </div>
-                      <p className="text-sm leading-tight text-slate-200-foreground">
+                      <p className="text-slate-200-foreground text-sm leading-tight">
                         Experience creator.
                       </p>
                     </a>
@@ -170,7 +170,7 @@ export function NavMenu(props: { lng: string }) {
                 <li className="row-span-3">
                   <NavigationMenuLink asChild>
                     <a
-                      className="flex h-full w-full select-none flex-col justify-end rounded-md dark:from-slate-800 dark:to-slate-900 bg-gradient-to-b from-slate-200/50 to-slate-200 p-6 no-underline outline-none focus:shadow-md"
+                      className="flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b from-slate-200/50 to-slate-200 p-6 no-underline outline-hidden select-none focus:shadow-md dark:from-slate-800 dark:to-slate-900"
                       href="https://dev.peyronnet.group"
                     >
                       <Image
@@ -179,10 +179,10 @@ export function NavMenu(props: { lng: string }) {
                         src={"/Devyus.png"}
                         alt={"The logo of Devyus."}
                       />
-                      <div className="mb-2 mt-4 text-lg font-medium">
+                      <div className="mt-4 mb-2 text-lg font-medium">
                         Devyus
                       </div>
-                      <p className="text-sm leading-tight text-slate-200-foreground">
+                      <p className="text-slate-200-foreground text-sm leading-tight">
                         {t("devyus-tagline")}
                       </p>
                     </a>
@@ -225,13 +225,13 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            "hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground block space-y-1 rounded-md p-3 leading-none no-underline outline-hidden transition-colors select-none hover:bg-slate-100 dark:hover:bg-slate-800",
             className,
           )}
           {...props}
         >
-          <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-slate-200-foreground">
+          <div className="text-sm leading-none font-medium">{title}</div>
+          <p className="text-slate-200-foreground line-clamp-2 text-sm leading-snug">
             {children}
           </p>
         </a>

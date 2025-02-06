@@ -12,6 +12,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
 import PricingFeatures from "./features";
+import { Paragraph } from "./text";
 import { Button } from "./ui/button";
 import {
   Select,
@@ -150,11 +151,11 @@ export default function Pricing({ user, products, subscriptions, lng }: Props) {
   };
   if (!products.length)
     return (
-      <section className="flex flex-col justify-center items-center min-h-screen ">
-        <h2 className="font-wide uppercase text-center">
+      <section className="flex min-h-screen flex-col items-center justify-center">
+        <h2 className="font-wide text-center uppercase">
           No plans are available right now.
         </h2>
-        <p className="font-serif text-center">
+        <p className="text-center">
           The product page is currently not available.
         </p>
       </section>
@@ -162,23 +163,25 @@ export default function Pricing({ user, products, subscriptions, lng }: Props) {
 
   return (
     <section>
-      <div className="max-w-6xl px-4 py-8 mx-auto sm:py-24 sm:px-6 lg:px-8 min-h-[calc(100vh-48px)]">
-        <div className="sm:flex sm:flex-col sm:align-center">
-          <h2 className="text-2xl uppercase font-wide">
+      <div className="mx-auto min-h-[calc(100vh-48px)] max-w-6xl px-4 py-8 sm:px-6 sm:py-24 lg:px-8">
+        <div className="sm:align-center sm:flex sm:flex-col">
+          <h2 className="font-wide text-2xl uppercase">
             {t("available-products")}
           </h2>
-          <p className="font-serif">{t("available-products-desc")}</p>
+          <Paragraph className="text-md sm:text-md">
+            {t("available-products-desc")}
+          </Paragraph>
 
-          <div className="relative self-center mt-6 dark:bg-slate-900 rounded-lg p-0.5 flex sm:mt-8 border dark:border-slate-800">
+          <div className="relative mt-6 flex self-center rounded-lg border p-0.5 sm:mt-8 dark:border-slate-800 dark:bg-slate-900">
             {intervals.includes("month") && (
               <button
                 onClick={() => setBillingInterval("month")}
                 type="button"
                 className={`${
                   billingInterval === "month"
-                    ? "relative w-1/2 bg-slate-100 border-slate-200 dark:bg-slate-700 dark:border-slate-800 shadow-sm dark:text-white"
-                    : "ml-0.5 relative w-1/2 border border-transparent text-slate-400"
-                } rounded-md m-1 py-2 text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 focus:z-10 sm:w-auto sm:px-8`}
+                    ? "relative w-1/2 border-slate-200 bg-slate-100 shadow-xs dark:border-slate-800 dark:bg-slate-700 dark:text-white"
+                    : "relative ml-0.5 w-1/2 border border-transparent text-slate-400"
+                } focus:ring-opacity-50 m-1 rounded-md py-2 text-sm font-medium whitespace-nowrap focus:z-10 focus:ring-2 focus:ring-blue-500 focus:outline-hidden sm:w-auto sm:px-8`}
               >
                 {t("monthly-billing")}
               </button>
@@ -189,14 +192,14 @@ export default function Pricing({ user, products, subscriptions, lng }: Props) {
                 type="button"
                 className={`${
                   billingInterval === "year"
-                    ? "relative w-1/2 bg-slate-100 border-slate-200 dark:bg-slate-700 dark:border-slate-800 shadow-sm dark:text-white"
-                    : "ml-0.5 relative w-1/2 border border-transparent text-slate-400"
-                } rounded-md m-1 py-2 text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 focus:z-10 sm:w-auto sm:px-8`}
+                    ? "relative w-1/2 border-slate-200 bg-slate-100 shadow-xs dark:border-slate-800 dark:bg-slate-700 dark:text-white"
+                    : "relative ml-0.5 w-1/2 border border-transparent text-slate-400"
+                } focus:ring-opacity-50 m-1 rounded-md py-2 text-sm font-medium whitespace-nowrap focus:z-10 focus:ring-2 focus:ring-blue-500 focus:outline-hidden sm:w-auto sm:px-8`}
               >
                 {t("yearly-billing")}
               </button>
             )}
-            <div className="items-center sm:flex mr-1 hidden">
+            <div className="mr-1 hidden items-center sm:flex">
               <Select
                 defaultValue={selectedCurrency}
                 value={selectedCurrency}
@@ -215,7 +218,7 @@ export default function Pricing({ user, products, subscriptions, lng }: Props) {
               </Select>
             </div>
           </div>
-          <div className="items-center flex py-2 sm:hidden">
+          <div className="flex items-center py-2 sm:hidden">
             <Select
               defaultValue={selectedCurrency}
               value={selectedCurrency}
@@ -234,7 +237,7 @@ export default function Pricing({ user, products, subscriptions, lng }: Props) {
             </Select>
           </div>
         </div>
-        <div className="mt-12 space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mx-0 xl:grid-cols-3">
+        <div className="mt-12 space-y-4 sm:mt-16 sm:grid sm:grid-cols-2 sm:gap-6 sm:space-y-0 lg:mx-auto lg:max-w-4xl xl:mx-0 xl:max-w-none xl:grid-cols-3">
           {products.map((product) => {
             if (!product.name?.toLowerCase().includes("write")) return <></>;
 
@@ -256,7 +259,7 @@ export default function Pricing({ user, products, subscriptions, lng }: Props) {
               <div
                 key={product.id}
                 className={cn(
-                  "divide-y divide-slate-100 rounded-lg border border-slate-300 bg-white shadow-sm dark:divide-slate-600 dark:border-slate-700 dark:bg-slate-900",
+                  "divide-y divide-slate-100 rounded-lg border border-slate-300 bg-white shadow-xs dark:divide-slate-600 dark:border-slate-700 dark:bg-slate-900",
                   {
                     "border border-blue-500": subscriptions
                       ? isSubscribedToProduct(product.id)
@@ -266,11 +269,11 @@ export default function Pricing({ user, products, subscriptions, lng }: Props) {
               >
                 <div className="p-6">
                   <span className="flex items-center space-x-2">
-                    <h2 className="text-xl font-semibold leading-6 dark:text-white">
+                    <h2 className="text-xl leading-6 font-semibold dark:text-white">
                       {product.name}
                     </h2>
                     {subscriptions?.length === 0 ? (
-                      <p className="rounded-full text-nowrap bg-blue-500 px-2 text-sm text-white">
+                      <p className="rounded-full bg-blue-500 px-2 text-sm text-nowrap text-white">
                         {t("free-trial")}
                       </p>
                     ) : (
@@ -312,10 +315,10 @@ export default function Pricing({ user, products, subscriptions, lng }: Props) {
 function LogoCloud() {
   return (
     <div>
-      <p className="mt-24 text-xs uppercase text-slate-400 text-center font-wide">
+      <p className="font-wide mt-24 text-center text-xs text-slate-400 uppercase">
         Brought to you by
       </p>
-      <div className="flex flex-col items-center my-12 space-y-4 sm:mt-8 sm:space-y-0 md:mx-auto md:max-w-2xl sm:grid sm:gap-6 sm:grid-cols-5">
+      <div className="my-12 flex flex-col items-center space-y-4 sm:mt-8 sm:grid sm:grid-cols-5 sm:gap-6 sm:space-y-0 md:mx-auto md:max-w-2xl">
         <div className="flex items-center justify-start">
           <a href="https://nextjs.org" aria-label="Next.js Link">
             <Image
@@ -323,14 +326,14 @@ function LogoCloud() {
               width={115}
               src="/next.svg"
               alt="Next.js Logo"
-              className="h-12 dark:text-white text-black dark:hidden"
+              className="h-12 text-black dark:hidden dark:text-white"
             />
             <Image
               height={48}
               width={115}
               src="/nextjs.svg"
               alt="Next.js Logo"
-              className="h-12 dark:text-white text-black hidden dark:block"
+              className="hidden h-12 text-black dark:block dark:text-white"
             />
           </a>
         </div>
@@ -341,14 +344,14 @@ function LogoCloud() {
               width={115}
               src="/vercell.svg"
               alt="Vercel.com Logo"
-              className="h-6 dark:text-white text-black dark:hidden"
+              className="h-6 text-black dark:hidden dark:text-white"
             />
             <Image
               height={48}
               width={115}
               src="/vercel.svg"
               alt="Vercel.com Logo"
-              className="h-6 dark:text-white hidden dark:block"
+              className="hidden h-6 dark:block dark:text-white"
             />
           </a>
         </div>
@@ -359,14 +362,14 @@ function LogoCloud() {
               width={115}
               src="/stripel.svg"
               alt="stripe.com Logo"
-              className="h-12 dark:text-white text-black dark:hidden"
+              className="h-12 text-black dark:hidden dark:text-white"
             />
             <Image
               height={48}
               width={115}
               src="/stripe.svg"
               alt="stripe.com Logo"
-              className="h-12 dark:text-white text-black hidden dark:block"
+              className="hidden h-12 text-black dark:block dark:text-white"
             />
           </a>
         </div>
@@ -377,14 +380,14 @@ function LogoCloud() {
               width={115}
               src="/supabasel.svg"
               alt="supabase.io Logo"
-              className="h-10 dark:text-white text-black dark:hidden"
+              className="h-10 text-black dark:hidden dark:text-white"
             />
             <Image
               height={48}
               width={115}
               src="/supabase.svg"
               alt="supabase.io Logo"
-              className="h-10 dark:text-white text-black hidden dark:block"
+              className="hidden h-10 text-black dark:block dark:text-white"
             />
           </a>
         </div>
@@ -395,14 +398,14 @@ function LogoCloud() {
               width={115}
               src="/github.svg"
               alt="github.com Logo"
-              className="h-8 dark:text-white text-black hidden dark:block"
+              className="hidden h-8 text-black dark:block dark:text-white"
             />
             <Image
               height={48}
               width={115}
               src="/githubl.svg"
               alt="github.com Logo"
-              className="h-8 dark:text-white text-black dark:hidden"
+              className="h-8 text-black dark:hidden dark:text-white"
             />
           </a>
         </div>

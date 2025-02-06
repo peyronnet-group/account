@@ -7,8 +7,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Account | Peyronnet Group",
-  description: "Manage your Peyronnet account.",
+  title: "Account | GRP",
+  description: "Manage your GRP account.",
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" },
