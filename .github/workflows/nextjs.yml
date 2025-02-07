@@ -2,7 +2,9 @@ name: Build Next.js Site
 on:
   push:
     branches:
-      - "*"  # This will trigger the workflow on push to any branch
+      - main
+      - deps 
+      - "*" # This will trigger the workflow on push to any branch
   pull_request:
     branches:
       - main  # This will trigger the workflow on pull requests targeting the main branch
